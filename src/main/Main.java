@@ -1,10 +1,13 @@
 package main;
 
+import pokemon.Pokemon;
+
 public class Main{
 
     public static void main(String[] args) {
         
-        System.out.println("Hola Pokemon");
+        Pokemon p = new Pokemon("Pepe");//Pueba del constructor x defecto hay q hacerlo bien
+        System.out.println(p.getNombre());
     }
     
 }
