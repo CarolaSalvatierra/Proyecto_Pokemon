@@ -3,6 +3,7 @@ package pokemon;
 public class Pokemon {
     // Atributos
     private String nombre;
+<<<<<<< HEAD
     private String mote;
     private int vitalidad;
     private int ataque;
@@ -37,10 +38,19 @@ public class Pokemon {
 
     }
 
+=======
+    //TODO: poner todos los atributos y modificar el constructor
+
+    public Pokemon(String nombre){
+        this.nombre = nombre;
+    }
+    
+>>>>>>> 1668bb0118060ef37d31bb01c7709aa291c47e7c
     public String getNombre() {
         return nombre;
     }
 
+<<<<<<< HEAD
     public String getMote() {
         return mote;
     }
@@ -154,4 +164,6 @@ public class Pokemon {
 
   }*/
 
+=======
+>>>>>>> 1668bb0118060ef37d31bb01c7709aa291c47e7c
 }
