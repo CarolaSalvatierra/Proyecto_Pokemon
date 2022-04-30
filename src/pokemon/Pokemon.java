@@ -40,3 +40,4 @@ public class Pokemon {
         this.estamina= estamina;
         experiencia = 10 * nivel; //Experiencia necesaria para que un pokemon suba de nivel.
     }
+}
