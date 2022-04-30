@@ -21,7 +21,7 @@ public class Pokemon {
     variables a la clase Pokemon. Añadirlas una vez creadas.
 
     private Mejora mejora; 
-    private Objeto objeto;
+    private Movimiento[] movimientos;
 
     */
     
@@ -39,5 +39,6 @@ public class Pokemon {
         this.velocidad= velocidad;
         this.estamina= estamina;
         experiencia = 10 * nivel; //Experiencia necesaria para que un pokemon suba de nivel.
+        this.estado = Estado.SIN_ESTADO;
     }
 }
