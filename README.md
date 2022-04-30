@@ -1,5 +1,5 @@
 # Proyecto_Pokemon
- Desarrollo de proyecto tercer trimestre 
+ Desarrollo de proyecto  Pokemon tercer trimestre
 
 
 ## Pokemon class 
