@@ -2,5 +2,6 @@
  Desarrollo de proyecto  Pokemon tercer trimestre
  
  Pedro Abad García
+ Carola Salvatierra Campos
 
 ## Pokemon class 
