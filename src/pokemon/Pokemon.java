@@ -163,7 +163,7 @@ public class Pokemon {
             this.experiencia -= exp;
             if(this.experiencia <=0){
                 Random rm= new Random();
-                subirNivel = true;
+                subirNivel = true; //Permite que el bucle se repita, por si hay experiencia que aún no ha asimilado el pokémon
                 exp = -this.experiencia; //Si la experiencia está por debajo de 0, significa que ha sobrado, así que la igualo aquí y la cambio a positivo
                 this.nivel += 1;
                 this.vitalidadMax += rm.nextInt(5) + 1;
@@ -176,9 +176,22 @@ public class Pokemon {
                 this.experiencia = 10 * nivel;
                 
 
+            } else {
+
+                //Si la exp obtenida no hace que la experiencia necesaria del pokemon para subir de nivel llege a 0 o menos,
+                //el pokémon no sube de nivel, por consecuente el bucle se cierra.
+                subirNivel = false; 
+                                    
             }
         }while (subirNivel == true);
     }
 
-    //public void aprenderMovimiento(Pokemon pokemon, Movimiento movimiento);
+    //public void aprenderAtaque(Pokemon pokemon, Movimiento movimiento);
+
+    
+    /*Este método no sé si ponerlo en la clase Pokemon o en la clase combate:
+
+        public void comprobarVentaja(Pokemon pokemon1, Pokemon pokemon2);
+
+    */
 }
