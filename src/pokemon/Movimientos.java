@@ -1,12 +1,12 @@
 package pokemon;
 
-public abstract class Movimientos {
-    protected String nombreMov;
-    protected Tipo tipo;
+public class Movimientos {
+    protected static String nombreMov;
+    protected static Tipo tipo;
 
     public Movimientos(String nombreMov, Tipo tipo){
-        this.nombreMov = nombreMov;
-        this.tipo = tipo;
+        Movimientos.nombreMov = nombreMov;
+        Movimientos.tipo = tipo;
 
     }
 

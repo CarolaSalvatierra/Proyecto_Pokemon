@@ -125,7 +125,7 @@ public class Pokemon {
         return mejora;
     }
 
-    public Movimiento[] getMovimientos() {
+    public Movimientos[] getMovimientos() {
         return movimientos;
     }
     */
@@ -160,12 +160,14 @@ public class Pokemon {
     public void subirNivel(int exp){
         boolean subirNivel = false; 
         do{
+            System.out.println("Experiencia obtenida: " + exp);
             this.experiencia -= exp;
             if(this.experiencia <=0){
+                System.out.println("¡Has subido un nivel!");
                 Random rm= new Random();
                 subirNivel = true; //Permite que el bucle se repita, por si hay experiencia que aún no ha asimilado el pokémon
-                exp = -this.experiencia; //Si la experiencia está por debajo de 0, significa que ha sobrado, así que la igualo aquí y la cambio a positivo
-                this.nivel += 1;
+                exp = -this.experiencia; //La experiencia está por debajo de 0, significa que ha sobrado, así que la igualo aquí y la cambio a positivo
+                this.nivel ++;
                 this.vitalidadMax += rm.nextInt(5) + 1;
                 this.estaminaMax += rm.nextInt(5) + 1;
                 this.ataque += rm.nextInt(5) + 1;
@@ -180,6 +182,7 @@ public class Pokemon {
 
                 //Si la exp obtenida no hace que la experiencia necesaria del pokemon para subir de nivel llege a 0 o menos,
                 //el pokémon no sube de nivel, por consecuente el bucle se cierra.
+                System.out.println("Experiencia necesaria: " + this.experiencia);
                 subirNivel = false; 
                                     
             }
