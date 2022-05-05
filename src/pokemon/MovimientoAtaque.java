@@ -3,7 +3,7 @@ package pokemon;
 public class MovimientoAtaque extends Movimientos{
     private int potencia;
     
-    MovimientoAtaque(int potencia){
+    MovimientoAtaque(String nombreMov, Tipo tipo, int potencia){
         super(nombreMov, tipo);
         this.potencia = potencia;
     }
