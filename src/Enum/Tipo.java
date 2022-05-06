@@ -1,4 +1,4 @@
-package pokemon;
+package Enum;
 
 public enum Tipo {
     AGUA,
@@ -7,5 +7,6 @@ public enum Tipo {
     BICHO,
     VOLADOR,
     ELECTRICO,
-    TIERRA
+    TIERRA, 
+    NORMAL
 }

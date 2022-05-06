@@ -2,6 +2,9 @@ package pokemon;
 
 import java.util.Random;
 
+import Enum.Estado;
+import Enum.Tipo;
+
 public class Pokemon {
 
     //Atributos de la clase Pokemon
@@ -22,18 +25,19 @@ public class Pokemon {
     private int fertilidad;
     private Estado estado;
     private Tipo[] tipo; //Máximo 2 tipos por pokemon
+    private Movimiento[] movimientos;
     /*Hasta que no se creen las clases, no se pueden añadir estas
     variables a la clase Pokemon. Añadirlas una vez creadas.
 
     private Mejora mejora; 
-    private Movimiento[] movimientos;
 
     */
     
     
     //TODO: poner todos los atributos y modificar el constructor
 
-    public Pokemon(String nombre, String mote, int vitalidadMax, int ataque, int defensa, int ataqueS, int defensaS, int velocidad, int estaminaMax, int nivel, Tipo[] tipo){
+    public Pokemon(String nombre, String mote, int vitalidadMax, int ataque, int defensa, int ataqueS, int defensaS, int velocidad, int estaminaMax, int nivel, Tipo[] tipo,
+    Movimiento[] movimientos){
         this.nombre = nombre;
         this.mote= mote;
         this.nivel = nivel;
@@ -50,6 +54,7 @@ public class Pokemon {
         this.fertilidad = 5;
         this.estado = Estado.SIN_ESTADO;
         this.tipo = tipo;
+        this.movimientos= movimientos;
 
     }
 
@@ -120,13 +125,17 @@ public class Pokemon {
         return tipo;
     }
 
+    public Movimiento[] getMovimientos() {
+        return movimientos;
+
+    }
+
     /*
     public Mejora getMejora() {
         return mejora;
     }
 
-    public Movimiento[] getMovimientos() {
-        return movimientos;
+
     }
     */
 
@@ -160,12 +169,14 @@ public class Pokemon {
     public void subirNivel(int exp){
         boolean subirNivel = false; 
         do{
+            System.out.println("Experiencia obtenida: " + exp);
             this.experiencia -= exp;
             if(this.experiencia <=0){
+                System.out.println("¡Has subido un nivel!");
                 Random rm= new Random();
-                subirNivel = true;
-                exp = -this.experiencia; //Si la experiencia está por debajo de 0, significa que ha sobrado, así que la igualo aquí y la cambio a positivo
-                this.nivel += 1;
+                subirNivel = true; //Permite que el bucle se repita, por si hay experiencia que aún no ha asimilado el pokémon
+                exp = -this.experiencia; //La experiencia está por debajo de 0, significa que ha sobrado, así que la igualo aquí y la cambio a positivo
+                this.nivel ++;
                 this.vitalidadMax += rm.nextInt(5) + 1;
                 this.estaminaMax += rm.nextInt(5) + 1;
                 this.ataque += rm.nextInt(5) + 1;
@@ -176,9 +187,23 @@ public class Pokemon {
                 this.experiencia = 10 * nivel;
                 
 
+            } else {
+
+                //Si la exp obtenida no hace que la experiencia necesaria del pokemon para subir de nivel llege a 0 o menos,
+                //el pokémon no sube de nivel, por consecuente el bucle se cierra.
+                System.out.println("Experiencia necesaria: " + this.experiencia);
+                subirNivel = false; 
+                                    
             }
         }while (subirNivel == true);
     }
 
-    //public void aprenderMovimiento(Pokemon pokemon, Movimiento movimiento);
+    //public void aprenderAtaque(Pokemon pokemon, Movimiento movimiento);
+
+    
+    /*Este método no sé si ponerlo en la clase Pokemon o en la clase combate:
+
+        public void comprobarVentaja(Pokemon pokemon1, Pokemon pokemon2);
+
+    */
 }
