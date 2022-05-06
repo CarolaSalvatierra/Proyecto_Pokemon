@@ -2,8 +2,12 @@ package pokemon;
 
 import java.util.Random;
 
+import javax.sound.sampled.FloatControl;
+
 import Enum.Estado;
 import Enum.Tipo;
+import Enum.Tipo_Movimiento;
+import Enum.Ventaja;
 
 public class Pokemon {
 
@@ -26,6 +30,7 @@ public class Pokemon {
     private Estado estado;
     private Tipo[] tipo; //Máximo 2 tipos por pokemon
     private Movimiento[] movimientos;
+    private Ventaja ventaja;
     /*Hasta que no se creen las clases, no se pueden añadir estas
     variables a la clase Pokemon. Añadirlas una vez creadas.
 
@@ -50,11 +55,12 @@ public class Pokemon {
         this.velocidad= velocidad;
         this.estaminaMax= estaminaMax;
         this.estamina= this.estaminaMax; //La estamina actual será igual a la máxima
-        experiencia = 10 * nivel; //Experiencia necesaria para que un pokemon suba de nivel
+        this.experiencia = 10 * nivel; //Experiencia necesaria para que un pokemon suba de nivel
         this.fertilidad = 5;
         this.estado = Estado.SIN_ESTADO;
         this.tipo = tipo;
         this.movimientos= movimientos;
+        this.ventaja = Ventaja.SIN_VENTAJA;
 
     }
 
@@ -143,6 +149,14 @@ public class Pokemon {
         this.mote = mote;
     }
 
+    public void setVitalidad(int vitalidad) {
+        this.vitalidad = vitalidad;
+    }
+
+    public void setEstamina(int estamina) {
+        this.estamina = estamina;
+    }
+
     public void setEstado(Estado estado) {
         this.estado = estado;
     }
@@ -154,8 +168,38 @@ public class Pokemon {
 
     //Métodos de acción
 
-    public void atacarPokemon(Pokemon pokemon){
+    public void atacarPokemon(MovimientoAtaque mv, Pokemon pokemon){
+        float efc = 1;
+        float danio = 0;
         
+        //Valor del operador efc de la fórmula final del daño.
+        if (this.ventaja == Ventaja.EFECTIVO){
+            efc = 2f;
+        } else if (this.ventaja == Ventaja.NO_EFECTIVO){
+            efc = 1f;
+        } else {
+            efc = 0.5f;
+        }
+
+        //Si el movimiento es físico, la operación del daño usará la defensa del pokémon rival. Si es especial, la fórmula será 
+        //con la defensa especial del pokémon rival.
+        if (mv.getTMovimiento() == Tipo_Movimiento.FISICO){
+            danio = 0.01f * efc * ((0.2f * this.nivel + 1 ) * this.ataque * mv.getPotencia()) / (25 * pokemon.getDefensa()) +2;
+        } else {
+            danio = 0.01f * efc * ((0.2f * this.nivel + 1 ) * this.ataqueS * mv.getPotencia()) / (25 * pokemon.getDefensaS()) +2;
+
+        }
+
+        pokemon.actualizarVIT(danio, pokemon);
+
+        
+        
+    }
+
+    public void actualizarVIT(float danio, Pokemon pokemon){
+        float actVIT = (int) pokemon.getVitalidad() - danio;
+        pokemon.setVitalidad(actVIT);
+
     }
 
     //Recupera toda su vitalidad y estamina, además de eliminar el estado que tuviese en ese momento.
