@@ -1,5 +1,6 @@
 package main;
 
+import pokemon.MovimientoAtaque;
 import pokemon.Pokemon;
 
 public class Main{

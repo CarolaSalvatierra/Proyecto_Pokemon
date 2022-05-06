@@ -141,7 +141,12 @@ public class Pokemon {
         return mejora;
     }
 
+<<<<<<< HEAD
 
+=======
+    public Movimientos[] getMovimientos() {
+        return movimientos;
+>>>>>>> 31cf86a9438c77877e4d87f69ab4cfc800015424
     }
     */
 
@@ -198,7 +203,7 @@ public class Pokemon {
 
     public void actualizarVIT(float danio, Pokemon pokemon){
         float actVIT = (int) pokemon.getVitalidad() - danio;
-        pokemon.setVitalidad(actVIT);
+        //pokemon.setVitalidad(actVIT);
 
     }
 
