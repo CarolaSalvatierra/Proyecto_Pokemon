@@ -203,7 +203,7 @@ public class Pokemon {
 
     public void actualizarVIT(float danio, Pokemon pokemon){
         float actVIT = (int) pokemon.getVitalidad() - danio;
-        //pokemon.setVitalidad(actVIT);
+
 
     }
 
