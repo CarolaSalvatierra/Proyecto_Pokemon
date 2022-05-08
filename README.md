@@ -1,5 +1,8 @@
 # Proyecto_Pokemon
  Desarrollo de proyecto tercer trimestre 
 
+## Autores
+Pedro Abad García
 
-## Pokemon class 
+Carola Salvatierra Campos
+## 
