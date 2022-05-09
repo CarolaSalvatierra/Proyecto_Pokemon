@@ -10,7 +10,7 @@ public class Entrenador1 {
     private int pokedolars;
     private Pokemon[]equipo1;//Equipo principal
     private Pokemon[] equipo2;//Equipo secundario
-    // cont =0 primera posicion le metemos un new pokemon q se gerera en el Constructor de pokemon
+    // cont =0 primera posicion le metemos un new pokemon q se gerera en el Constructor de p9okemon
 	// constructor con el nivel q tenga
     //cont=0 le ponemos el 1er pokemon 
     public Entrenador1(String nombreE){
