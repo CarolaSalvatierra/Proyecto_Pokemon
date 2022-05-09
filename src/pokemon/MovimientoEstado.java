@@ -7,8 +7,8 @@ public class MovimientoEstado extends Movimiento{
 
     private Estado estado;
 
-    public MovimientoEstado(String nombreMov, Tipo tipo, Estado estado){
-        super(nombreMov, tipo);
+    public MovimientoEstado(String nombreMov, Tipo tipo, Estado estado, int estamina){
+        super(nombreMov, tipo, estamina);
         this.estado = estado;
     }
 

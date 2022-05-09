@@ -26,15 +26,10 @@ public class Pokemon {
     private int experiencia;
     private int fertilidad;
     private Estado estado;
-    private Tipo[] tipo = new Tipo[2]; //Máximo 2 tipos por pokemon
-    private Movimiento[] movimientos = new Movimiento[4]; //No sé si inicializarlo aquí o en el constructor
+    private Tipo[] tipo; //Máximo 2 tipos por pokemon
+    private Movimiento[] movimientos; 
     private Ventaja ventaja;
-    /*Hasta que no se creen las clases, no se pueden añadir estas
-    variables a la clase Pokemon. Añadirlas una vez creadas.
-
-    private Mejora mejora; 
-
-    */
+    //private boolean mejora = false;
     
     
     //TODO: poner todos los atributos y modificar el constructor
@@ -56,8 +51,8 @@ public class Pokemon {
         this.experiencia = 10 * nivel; //Experiencia necesaria para que un pokemon suba de nivel
         this.fertilidad = 5;
         this.estado = Estado.SIN_ESTADO;
-        this.tipo = tipo;
-        this.movimientos= movimientos; //No sé si inicializarlo aquí o en el constructor
+        this.tipo = new Tipo[2];
+        this.movimientos= new Movimiento[4]; 
         //this.mejora = mejora; 
         this.ventaja = Ventaja.SIN_VENTAJA;
 
@@ -168,35 +163,45 @@ public class Pokemon {
     public void atacarPokemon(MovimientoAtaque mv, Pokemon pokemon){
         float efc = 1;
         float danio = 0;
-        
-        //Valor del operador efc de la fórmula final del daño.
-        if (this.ventaja == Ventaja.EFECTIVO){
-            efc = 2f;
-        } else if (this.ventaja == Ventaja.NO_EFECTIVO){
-            efc = 1f;
+
+        //Si la estamina del pokemon menos la estamina requerida por el movimiento es menor que 0, el pokemon no será
+        //capaz de realizarlo.
+        if (this.estamina - mv.getEstamina() < 0){
+            System.out.println("No hay suficiente estamina para realizar el movimiento");
+
         } else {
-            efc = 0.5f;
+            this.estamina -= mv.getEstamina();
+
+            //comprobarVentaja(mv, pokemon);
+
+            //Valor del operador efc de la fórmula final del daño.
+            if (this.ventaja == Ventaja.EFECTIVO){
+                efc = 2f;
+            } else if (this.ventaja == Ventaja.NO_EFECTIVO){
+                efc = 1f;
+            } else {
+                efc = 0.5f;
+            }
+
+            //Si el movimiento es físico, la operación del daño usará la defensa del pokémon rival. Si es especial, la fórmula será 
+            //con la defensa especial del pokémon rival.
+            if (mv.getTMovimiento() == Tipo_Movimiento.FISICO){
+                danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataque - pokemon.getDefensa());
+            } else {
+                danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataqueS - pokemon.getDefensaS());
+
+            }
+
+
+            actualizarVITDamage(danio, pokemon);
         }
-
-        //Si el movimiento es físico, la operación del daño usará la defensa del pokémon rival. Si es especial, la fórmula será 
-        //con la defensa especial del pokémon rival.
-        if (mv.getTMovimiento() == Tipo_Movimiento.FISICO){
-            danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataque - pokemon.getDefensa());
-        } else {
-            danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataque - pokemon.getDefensa());
-
-        }
-
-        pokemon.actualizarVITDamage(danio, pokemon);
-
-        
         
     }
 
     public void actualizarVITDamage(float danio, Pokemon pokemon){
         float actVIT = (int) pokemon.getVitalidad() - danio;
 
-        pokemon.setVitalidad(actVIT);
+        setVitalidad(actVIT);
 
     }
 
