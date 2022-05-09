@@ -4,4 +4,8 @@
  Pedro Abad García
  Carola Salvatierra Campos
 
-## Pokemon class 
+## Autores
+Pedro Abad García
+
+Carola Salvatierra Campos
+## 
