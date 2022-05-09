@@ -11,7 +11,7 @@ import pokemon.Pokemon;
 
 public class Combate {
 
-    //Atributo
+    //Atributos
     private List<Turno> turnos;
     public static final String PATH="./log/combate.log";
 
