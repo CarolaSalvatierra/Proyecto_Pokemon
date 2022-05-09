@@ -2,8 +2,6 @@ package pokemon;
 
 import java.util.Random;
 
-import javax.sound.sampled.FloatControl;
-
 import Enum.Estado;
 import Enum.Tipo;
 import Enum.Tipo_Movimiento;
@@ -28,8 +26,8 @@ public class Pokemon {
     private int experiencia;
     private int fertilidad;
     private Estado estado;
-    private Tipo[] tipo; //Máximo 2 tipos por pokemon
-    private Movimiento[] movimientos;
+    private Tipo[] tipo = new Tipo[2]; //Máximo 2 tipos por pokemon
+    private Movimiento[] movimientos = new Movimiento[4]; //No sé si inicializarlo aquí o en el constructor
     private Ventaja ventaja;
     /*Hasta que no se creen las clases, no se pueden añadir estas
     variables a la clase Pokemon. Añadirlas una vez creadas.
@@ -59,7 +57,8 @@ public class Pokemon {
         this.fertilidad = 5;
         this.estado = Estado.SIN_ESTADO;
         this.tipo = tipo;
-        this.movimientos= movimientos;
+        this.movimientos= movimientos; //No sé si inicializarlo aquí o en el constructor
+        //this.mejora = mejora; 
         this.ventaja = Ventaja.SIN_VENTAJA;
 
     }
@@ -141,21 +140,14 @@ public class Pokemon {
         return mejora;
     }
 
-<<<<<<< HEAD
-
-=======
-    public Movimientos[] getMovimientos() {
-        return movimientos;
->>>>>>> 31cf86a9438c77877e4d87f69ab4cfc800015424
-    }
     */
 
     public void setMote(String mote) {
         this.mote = mote;
     }
 
-    public void setVitalidad(int vitalidad) {
-        this.vitalidad = vitalidad;
+    public void setVitalidad(float vitalidad) {
+        this.vitalidad = (int) vitalidad;
     }
 
     public void setEstamina(int estamina) {
@@ -189,23 +181,25 @@ public class Pokemon {
         //Si el movimiento es físico, la operación del daño usará la defensa del pokémon rival. Si es especial, la fórmula será 
         //con la defensa especial del pokémon rival.
         if (mv.getTMovimiento() == Tipo_Movimiento.FISICO){
-            danio = 0.01f * efc * ((0.2f * this.nivel + 1 ) * this.ataque * mv.getPotencia()) / (25 * pokemon.getDefensa()) +2;
+            danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataque - pokemon.getDefensa());
         } else {
-            danio = 0.01f * efc * ((0.2f * this.nivel + 1 ) * this.ataqueS * mv.getPotencia()) / (25 * pokemon.getDefensaS()) +2;
+            danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataque - pokemon.getDefensa());
 
         }
 
-        pokemon.actualizarVIT(danio, pokemon);
+        pokemon.actualizarVITDamage(danio, pokemon);
 
         
         
     }
 
-    public void actualizarVIT(float danio, Pokemon pokemon){
+    public void actualizarVITDamage(float danio, Pokemon pokemon){
         float actVIT = (int) pokemon.getVitalidad() - danio;
 
+        pokemon.setVitalidad(actVIT);
 
     }
+
 
     //Recupera toda su vitalidad y estamina, además de eliminar el estado que tuviese en ese momento.
     public void descansar(Pokemon pokemon){
@@ -247,12 +241,26 @@ public class Pokemon {
         }while (subirNivel == true);
     }
 
-    //public void aprenderAtaque(Pokemon pokemon, Movimiento movimiento);
+    public void aprenderAtaque(Pokemon pokemon, Movimiento movimiento){
+        Random rm = new Random();
 
-    
-    /*Este método no sé si ponerlo en la clase Pokemon o en la clase combate:
+        for (int i = 0; i <= this.movimientos.length - 1; i++){
+            if (this.movimientos[i] == null){
+                this.movimientos[i] = movimiento;
+                break;
+            }
+            
+            //Si el contador llega a ser igual que el tamaño del array y no ha encontrado ninguna celda nula en el array, no se habrá forzado al bucle a 
+            //romperse, por lo que se sustituirá un movimiento ya aprendido al azar por el nuevo a aprender.
+            //Otra forma de hacerlo sería dando opción al usuario de elegir si desea sustituir alguna de los movimientos ya aprendidos por el
+            //nuevo o no, pero creo que hasta que no aprendamos a representarlo gráficamente, se quedará así.
+            if (i == this.movimientos.length - 1){
+                int m = rm.nextInt(3);
+                this.movimientos[m] = movimiento;
+            }
 
-        public void comprobarVentaja(Pokemon pokemon1, Pokemon pokemon2);
+        }
 
-    */
+    }
+
 }
