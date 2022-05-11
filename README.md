@@ -3,9 +3,3 @@
  
  Pedro Abad García
  Carola Salvatierra Campos
-
-## Autores
-Pedro Abad García
-
-Carola Salvatierra Campos
-## 
