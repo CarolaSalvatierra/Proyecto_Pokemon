@@ -1,5 +1,9 @@
 package entrenador;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
 import pokemon.Pokemon;
 
 public class Entrenador1 {
@@ -8,21 +12,20 @@ public class Entrenador1 {
     private String nombreE;
     private int cont =0;
     private int pokedolars;
-    private Pokemon[]equipo1;//Equipo principal
-    private Pokemon[] equipo2;//Equipo secundario
+    private List<Pokemon>equipo1;//Equipo principal
+    private List<Pokemon> equipo2;//Equipo secundario
     // cont =0 primera posicion le metemos un new pokemon q se gerera en el Constructor de p9okemon
 	// constructor con el nivel q tenga
     //cont=0 le ponemos el 1er pokemon 
-    public Entrenador1(String nombreE){
+    public Entrenador1(String nombreE, ArrayList<Pokemon>equipo1, ArrayList<Pokemon>equipo2){
         this.nombreE = nombreE;
-        this.equipo1 = new Pokemon[4];
-        this.equipo2 = new Pokemon[30];
+        this.equipo1 = new LinkedList<Pokemon>();
+        this.equipo2 = new LinkedList<Pokemon>();
     //  this.pokedolars = pokedolars;//Esto es necesario?
         cont++; //para que vaya poniendo los pokemon en las posiciones de los equipos
         
     }
-    public Entrenador1(String nombreE2, Object equipo12) {
-    }
+   
     public String getNombreE() {
         return nombreE;
     }
@@ -32,19 +35,46 @@ public class Entrenador1 {
     public int getPokedolars() {
         return pokedolars;
     }
-  
-    public Pokemon[] getEquipo1() {
+    public List<Pokemon> getEquipo1() {
         return equipo1;
     }
-    public Pokemon[] getEquipo2() {
+    public List<Pokemon> getEquipo2() {
         return equipo2;
     }
+    public void setNombreE(String nombreE) {
+        this.nombreE = nombreE;
+    }
+    public void setCont(int cont) {
+        this.cont = cont;
+    }
+    public void setEquipo1(List<Pokemon> equipo1) {
+        this.equipo1 = equipo1;
+    }
+    public void setEquipo2(List<Pokemon> equipo2) {
+        this.equipo2 = equipo2;
+    }
     //Metodos de acción
+    public void agregarPokemo(Pokemon pokemon){
+        equipo1.add(pokemon);
+    }
+    public boolean moverPokemonE2(Pokemon pokemon){
+        boolean movido = false;
+        if(this.equipo1.size() < 2 ){
+            System.out.println("No puedes mover un pokemon");
+            return false;
+        }
+        else if(this.equipo1.size() > 2){
+            this.equipo1.remove(1);
+            System.out.println("Has movido un poquemon");
+            return true;
+        }
+        return true;
+    }
     // Se elige a un pokemon del equipo1 en funcion del indice recibido (i) y se
 	// devuelve, si el indice no se encuentra en el vector se devuelve null
-    public Pokemon elegir(int i){
+    public Object elegir(int i){
         if(i < cont){ //Cont es el lugar donde a partir de ahi esta vacio el array
-			return equipo1[i];
+			return equipo1.size();
 		}
 		else{
 			return null;
@@ -59,7 +89,7 @@ public class Entrenador1 {
         boolean capturado = false;
 
 		if (enemigo.getVitalidad() <= 20) {// Esto es inventado, si la vida del enemigo es menor o igual q 20 lo capturamos
-                equipo2[cont] = enemigo; // Metemos al enemigo
+                ·equipo2.size() = enemigo; // Metemos al enemigo
 				capturado = true;
 				cont++;
 
