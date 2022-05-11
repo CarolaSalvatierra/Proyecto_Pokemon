@@ -36,7 +36,7 @@ public class Combate {
         try {
             FileWriter fw = new FileWriter(fichero);//File writer es el encargado de escribir en el fichero
             BufferedWriter bw = new BufferedWriter(fw);//Espacio de memoria que nos permite escribir texto para luego volcarlo
-            
+            //Recorremos c/u de los turnos
             for (Turno turno : turnos) {
                 bw.write("Turno "+ turno.getNumeroTurno()+ ": \n");
                 bw.write("Entrenador: "+turno.getAccionEntrenador()+"\n");
