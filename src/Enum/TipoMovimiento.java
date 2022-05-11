@@ -1,6 +1,6 @@
 package Enum;
 
-public enum Tipo_Movimiento{
+public enum TipoMovimiento{
     FISICO,
     ESPECIAL
 }

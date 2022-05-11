@@ -1,13 +1,13 @@
 package pokemon;
 
 import Enum.Tipo;
-import Enum.Tipo_Movimiento;
+import Enum.TipoMovimiento;
 
 public class MovimientoAtaque extends Movimiento{
     private int potencia;
-    private Tipo_Movimiento tMovimiento;
+    private TipoMovimiento tMovimiento;
     
-    MovimientoAtaque(String nombreMov, Tipo tipo, Tipo_Movimiento tMovimiento, int potencia, int estamina){
+    MovimientoAtaque(String nombreMov, Tipo tipo, TipoMovimiento tMovimiento, int potencia, int estamina){
         super(nombreMov, tipo, estamina);
         this.potencia = potencia;
         this.tMovimiento = tMovimiento;
@@ -17,7 +17,7 @@ public class MovimientoAtaque extends Movimiento{
         return potencia;
     }
 
-    public Tipo_Movimiento getTMovimiento() {
+    public TipoMovimiento getTMovimiento() {
         return tMovimiento;
     }
 }

@@ -1,4 +1,4 @@
-package enum;
+package Enum;
 
 public enum Estado {
     PARALIZADO,
