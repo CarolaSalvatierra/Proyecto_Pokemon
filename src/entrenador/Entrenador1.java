@@ -57,6 +57,7 @@ public class Entrenador1 {
     public void agregarPokemo(Pokemon pokemon){
         equipo1.add(pokemon);
     }
+    /*Metodo para mover pokemon al equipo secundario */
     public boolean moverPokemonE2(Pokemon pokemon){
         boolean movido = false;
         if(this.equipo1.size() < 2 ){
@@ -66,6 +67,20 @@ public class Entrenador1 {
         else if(this.equipo1.size() > 2){
             this.equipo1.remove(1);
             System.out.println("Has movido un poquemon");
+            return true;
+        }
+        return true;
+    }
+    //Metodo para movel al pokemon del equipo secundario al principal
+    public boolean moverPokemonE1(Pokemon pokemon){
+        boolean movido = false;
+        if(this.equipo1.size() == 4){
+            System.out.println("El equipo esta completo, no puedes mover a un pokemon");
+            return false;
+        }
+        else if(this.equipo1.size()< 4){
+            this.equipo2.remove(1);
+            System.out.println("Has movido un pokemon");
             return true;
         }
         return true;
@@ -89,7 +104,7 @@ public class Entrenador1 {
         boolean capturado = false;
 
 		if (enemigo.getVitalidad() <= 20) {// Esto es inventado, si la vida del enemigo es menor o igual q 20 lo capturamos
-                ·equipo2.size() = enemigo; // Metemos al enemigo
+                equipo2.size(); = enemigo; // Metemos al enemigo
 				capturado = true;
 				cont++;
 
