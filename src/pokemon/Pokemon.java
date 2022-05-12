@@ -1,5 +1,6 @@
 package pokemon;
 
+import java.util.HashMap;
 import java.util.Random;
 
 import Enum.Estado;
@@ -29,7 +30,7 @@ public class Pokemon {
     private Tipo[] tipo; //Máximo 2 tipos por pokemon
     private Movimiento[] movimientos; 
     private Ventaja ventaja;
-    //private boolean mejora = false;
+    private boolean mejora = false;
     
     
     //TODO: poner todos los atributos y modificar el constructor
@@ -166,34 +167,39 @@ public class Pokemon {
 
         //Si la estamina del pokemon menos la estamina requerida por el movimiento es menor que 0, el pokemon no será
         //capaz de realizarlo.
-        if (this.estamina - mv.getEstamina() < 0){
-            System.out.println("No hay suficiente estamina para realizar el movimiento");
-
+        if (this.estado == Estado.PARALIZADO){
+           System.out.println("¡El pokémon está paralizado!");
         } else {
-            this.estamina -= mv.getEstamina();
 
-            comprobarVentaja(mv, pokemon);
+            if (this.estamina - mv.getEstamina() < 0){
+                System.out.println("No hay suficiente estamina para realizar el movimiento");
 
-            //Valor del operador efc de la fórmula final del daño.
-            if (this.ventaja == Ventaja.EFECTIVO){
-                efc = 2f;
-            } else if (this.ventaja == Ventaja.NO_EFECTIVO){
-                efc = 1f;
             } else {
-                efc = 0.5f;
+                this.estamina -= mv.getEstamina();
+
+                comprobarVentaja(mv, pokemon);
+
+                //Valor del operador efc de la fórmula final del daño.
+                if (this.ventaja == Ventaja.EFECTIVO){
+                    efc = 2f;
+                } else if (this.ventaja == Ventaja.NO_EFECTIVO){
+                    efc = 1f;
+                } else {
+                    efc = 0.5f;
+                }
+
+                //Si el movimiento es físico, la operación del daño usará la defensa del pokémon rival. Si es especial, la fórmula será 
+                //con la defensa especial del pokémon rival.
+                if (mv.getTMovimiento() == TipoMovimiento.FISICO){
+                    danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataque - pokemon.getDefensa());
+                } else {
+                    danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataqueS - pokemon.getDefensaS());
+
+                }
+
+
+                actualizarVITDamage(danio, pokemon);
             }
-
-            //Si el movimiento es físico, la operación del daño usará la defensa del pokémon rival. Si es especial, la fórmula será 
-            //con la defensa especial del pokémon rival.
-            if (mv.getTMovimiento() == TipoMovimiento.FISICO){
-                danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataque - pokemon.getDefensa());
-            } else {
-                danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataqueS - pokemon.getDefensaS());
-
-            }
-
-
-            actualizarVITDamage(danio, pokemon);
         }
         
     }
@@ -269,7 +275,8 @@ public class Pokemon {
     }
 
     public void comprobarVentaja(MovimientoAtaque mv, Pokemon pokemon){
-
+        HashMap<Tipo, Tipo> comprobarV = new HashMap<Tipo, Tipo>();
+        
     }
 
 }
