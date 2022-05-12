@@ -1,10 +1,16 @@
 package pokemon;
 
+import java.io.IOException;
+
 import Enum.Tipo;
 import Enum.Tipo_Movimiento;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.stage.Stage;
 
 
-public class Main2 {
+public class Main2 extends Application {
     public static void main(String[] args) {
         Tipo[] tipos = {Tipo.AGUA};
         MovimientoAtaque mA = new MovimientoAtaque("Placaje", Tipo.NORMAL, Tipo_Movimiento.FISICO, 20, 55);
@@ -22,7 +28,21 @@ public class Main2 {
 
         n1.subirNivel(5);
 
+        //llama al metodo launch, metodo de java FX q sirve para lanzar las aplicaciones de java FX
+        launch(args);
 
+
+    }
+    //Star
+    @Override
+    public void start(Stage arg0) {
+        //Esto sirve para cargar la vista
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("./vista/boton.fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 
 }
