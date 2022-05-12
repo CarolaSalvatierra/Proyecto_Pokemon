@@ -1,8 +1,5 @@
 # Proyecto_Pokemon
- Desarrollo de proyecto tercer trimestre 
-
-## Componentes
+ Desarrollo de proyecto  Pokemon tercer trimestre
+ 
+ Pedro Abad García
  Carola Salvatierra Campos
-
-
-## Pokemon class 
