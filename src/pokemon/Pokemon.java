@@ -7,6 +7,7 @@ import Enum.Estado;
 import Enum.Tipo;
 import Enum.TipoMovimiento;
 import Enum.Ventaja;
+import Enum.Mejora;
 
 public class Pokemon {
 
@@ -27,10 +28,12 @@ public class Pokemon {
     private int experiencia;
     private int fertilidad;
     private Estado estado;
+    private int numeroTurnosEstado;
     private Tipo[] tipo; //Máximo 2 tipos por pokemon
     private Movimiento[] movimientos; 
     private Ventaja ventaja;
-    private boolean mejora = false;
+    private int numeroTurnosMejora;
+    private Mejora mejora;
     
     
     //TODO: poner todos los atributos y modificar el constructor
@@ -144,6 +147,10 @@ public class Pokemon {
 
     public void setVitalidad(float vitalidad) {
         this.vitalidad = (int) vitalidad;
+
+        if (this.vitalidad <= 0){
+            this.estado = Estado.KO;
+        }
     }
 
     public void setEstamina(int estamina) {
@@ -276,6 +283,8 @@ public class Pokemon {
 
     public void comprobarVentaja(MovimientoAtaque mv, Pokemon pokemon){
         HashMap<Tipo, Tipo> comprobarV = new HashMap<Tipo, Tipo>();
+
+
         
     }
 
