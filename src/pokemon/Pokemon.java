@@ -4,7 +4,7 @@ import java.util.Random;
 
 import Enum.Estado;
 import Enum.Tipo;
-import Enum.Tipo_Movimiento;
+import Enum.TipoMovimiento;
 import Enum.Ventaja;
 
 public class Pokemon {
@@ -67,7 +67,6 @@ public class Pokemon {
     public String getMote() {
         return mote;
     }
-
 
     public int getVitalidadMax() {
         return vitalidadMax;
@@ -185,7 +184,7 @@ public class Pokemon {
 
             //Si el movimiento es físico, la operación del daño usará la defensa del pokémon rival. Si es especial, la fórmula será 
             //con la defensa especial del pokémon rival.
-            if (mv.getTMovimiento() == Tipo_Movimiento.FISICO){
+            if (mv.getTMovimiento() == TipoMovimiento.FISICO){
                 danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataque - pokemon.getDefensa());
             } else {
                 danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataqueS - pokemon.getDefensaS());

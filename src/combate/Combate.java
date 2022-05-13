@@ -49,10 +49,5 @@ public class Combate {
         }      
     }
 
-    //metodo para comprobar ventaja 
- /*   public comprobarVentaja(Pokemon pokemon, Movimiento movimiento){
-
-    }*/
-
 
 }
