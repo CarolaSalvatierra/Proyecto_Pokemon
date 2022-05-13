@@ -1,11 +1,11 @@
 package combate;
 
 public class Turno {
-
+    //Atributos
     private int numeroTurno;
     private String accionEntrenador;
     private String accionRival;
-
+    //Constructor
     public Turno(int numeroTurno, String accionEntrenador, String accionRival){
         this.numeroTurno = numeroTurno;
         this.accionEntrenador = accionEntrenador;
