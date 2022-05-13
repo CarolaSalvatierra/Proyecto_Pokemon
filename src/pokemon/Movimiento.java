@@ -2,7 +2,7 @@ package pokemon;
 
 import Enum.Tipo;
 
-public class Movimiento {
+public abstract class Movimiento {
     protected static String nombreMov;
     protected static Tipo tipo;
     protected static int estamina;

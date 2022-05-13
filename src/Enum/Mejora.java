@@ -1,6 +1,10 @@
 package Enum;
 
-public class Mejora {
-    
-    
+public enum Mejora {
+    ATAQUE,
+    DEFENSA,
+    ATAQUEES,
+    DEFENSAES,
+    VELOCIDAD
+
 }

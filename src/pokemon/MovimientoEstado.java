@@ -3,7 +3,7 @@ package pokemon;
 import Enum.Estado;
 import Enum.Tipo;
 
-public class MovimientoEstado extends Movimiento{
+public abstract class MovimientoEstado extends Movimiento{
 
     private Estado estado;
     private int numeroTurnos;
@@ -14,6 +14,7 @@ public class MovimientoEstado extends Movimiento{
         this.numeroTurnos =  numeroTurnos;
     }
 
+
     public int getNumeroTurnos() {
         return numeroTurnos;
     }
@@ -21,6 +22,8 @@ public class MovimientoEstado extends Movimiento{
     public Estado getEstado() {
         return estado;
     }
+
+    public abstract void efectoEstado(Pokemon pokemon);
 
     
 }

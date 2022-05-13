@@ -32,8 +32,8 @@ public class Pokemon {
     private Tipo[] tipo; //Máximo 2 tipos por pokemon
     private Movimiento[] movimientos; 
     private Ventaja ventaja;
-    private int numeroTurnosMejora;
     private Mejora mejora;
+    private int numeroTurnosMejora;
     
     
     //TODO: poner todos los atributos y modificar el constructor
@@ -134,12 +134,18 @@ public class Pokemon {
 
     }
 
-    /*
     public Mejora getMejora() {
         return mejora;
     }
 
-    */
+    public int getNumeroTurnosEstado() {
+        return numeroTurnosEstado;
+    }
+
+    public int getNumeroTurnosMejora() {
+        return numeroTurnosMejora;
+    }
+
 
     public void setMote(String mote) {
         this.mote = mote;
@@ -161,21 +167,25 @@ public class Pokemon {
         this.estado = estado;
     }
 
-    /*public void setMejora(Mejora mejora){
+    public void setMejora(Mejora mejora){
         this.mejora = mejora;
     }
-    */
 
     //Métodos de acción
 
     public void atacarPokemon(MovimientoAtaque mv, Pokemon pokemon){
         float efc = 1;
         float danio = 0;
+        float estado = 0;
+        int mejoraUsAt = 1;
+        int mejoraUsAtS = 1;
+        int mejoraPokDef = 1;
+        int mejoraPokDS = 1;
 
         //Si la estamina del pokemon menos la estamina requerida por el movimiento es menor que 0, el pokemon no será
         //capaz de realizarlo.
-        if (this.estado == Estado.PARALIZADO){
-           System.out.println("¡El pokémon está paralizado!");
+        if (this.estado == Estado.PARALIZADO || this.estado == Estado.DORMIDO){
+           System.out.println("¡El pokémon es incapaz de realizar una acción!");
         } else {
 
             if (this.estamina - mv.getEstamina() < 0){
@@ -187,25 +197,57 @@ public class Pokemon {
                 comprobarVentaja(mv, pokemon);
 
                 //Valor del operador efc de la fórmula final del daño.
-                if (this.ventaja == Ventaja.EFECTIVO){
-                    efc = 2f;
-                } else if (this.ventaja == Ventaja.NO_EFECTIVO){
-                    efc = 1f;
-                } else {
-                    efc = 0.5f;
+                switch (this.ventaja){
+                    case EFECTIVO:
+                        efc = 2f;
+                        break;
+                    case NO_EFECTIVO:
+                        efc = 0.5f;
+                        break;
+                    default:
+                        break;
+                }
+
+                //Valor del operador mejora para la potencia del usuario de la fórmula final del daño.
+                switch (this.mejora){
+                    case ATAQUE:
+                        mejoraUsAt = 2;
+                        break;
+                    case ATAQUEES:
+                        mejoraUsAtS = 2;
+                        break;
+                    default:
+                        break;
+                }
+
+                //Valor del operador mejora para la defensa del rival de la fórmula final del daño.
+                switch (pokemon.getMejora()){
+                    case DEFENSA:
+                        mejoraPokDef = 2;
+                        break;
+                    case DEFENSAES:
+                        mejoraPokDS = 2;
+                        break;
+                    default:
+                        break;
+                }
+
+                //Valor del daño que recibirá si tiene el estado Quemadura. Se sumará al llamar al método actualizarVitDamage.
+                if (this.estado == Estado.QUEMADO){
+                    estado = (pokemon.getVitalidadMax() * 15) / 100;
                 }
 
                 //Si el movimiento es físico, la operación del daño usará la defensa del pokémon rival. Si es especial, la fórmula será 
                 //con la defensa especial del pokémon rival.
                 if (mv.getTMovimiento() == TipoMovimiento.FISICO){
-                    danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataque - pokemon.getDefensa());
+                    danio = ((mv.getPotencia() * mejoraUsAt ) * efc + this.ataque - (pokemon.getDefensa()  *  mejoraPokDef ));
                 } else {
-                    danio = ((mv.getPotencia() /* * this.mejora */) * efc + this.ataqueS - pokemon.getDefensaS());
+                    danio = ((mv.getPotencia() * mejoraUsAtS ) * efc + this.ataqueS - pokemon.getDefensaS()  *  mejoraPokDS );
 
                 }
 
 
-                actualizarVITDamage(danio, pokemon);
+                actualizarVITDamage(danio + estado, pokemon);
             }
         }
         
@@ -223,7 +265,7 @@ public class Pokemon {
     public void descansar(Pokemon pokemon){
         pokemon.setEstado(Estado.SIN_ESTADO);
         this.vitalidad = this.vitalidadMax;
-        this.estamina= this.estaminaMax;
+        this.estamina = this.estaminaMax;
     }
 
     //Creo que esto podría hacerse de una forma más eficiente pero ahora mismo no tengo ni idea.
