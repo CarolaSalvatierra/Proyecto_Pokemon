@@ -2,6 +2,15 @@
     "java.project.sourcePaths": ["src"],
     "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
-        "lib/**/*.jar"
+        "lib/**/*.jar",
+        "g:\\CESUR\\Programación\\JavaFX\\javafx-sdk-18.0.1\\lib\\javafx.base.jar",
+        "g:\\CESUR\\Programación\\JavaFX\\javafx-sdk-18.0.1\\lib\\javafx.controls.jar",
+        "g:\\CESUR\\Programación\\JavaFX\\javafx-sdk-18.0.1\\lib\\javafx.fxml.jar",
+        "g:\\CESUR\\Programación\\JavaFX\\javafx-sdk-18.0.1\\lib\\javafx.graphics.jar",
+        "g:\\CESUR\\Programación\\JavaFX\\javafx-sdk-18.0.1\\lib\\javafx.media.jar",
+        "g:\\CESUR\\Programación\\JavaFX\\javafx-sdk-18.0.1\\lib\\javafx.swing.jar",
+        "g:\\CESUR\\Programación\\JavaFX\\javafx-sdk-18.0.1\\lib\\javafx.web.jar",
+        "g:\\CESUR\\Programación\\JavaFX\\javafx-sdk-18.0.1\\lib\\javafx-swt.jar",
+        "c:\\Users\\media\\OneDrive\\Escritorio\\CESUR\\Programación\\Proyecto_Pokémon\\mysql-connector-java-8.0.27.jar"
     ]
 }

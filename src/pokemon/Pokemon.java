@@ -171,7 +171,7 @@ public class Pokemon {
         } else {
             this.estamina -= mv.getEstamina();
 
-            //comprobarVentaja(mv, pokemon);
+            comprobarVentaja(mv, pokemon);
 
             //Valor del operador efc de la fórmula final del daño.
             if (this.ventaja == Ventaja.EFECTIVO){
@@ -267,4 +267,12 @@ public class Pokemon {
 
     }
 
+<<<<<<< HEAD
 }
+=======
+    public void comprobarVentaja(MovimientoAtaque mv, Pokemon pokemon){
+
+    }
+
+}
+>>>>>>> clase_pokemon

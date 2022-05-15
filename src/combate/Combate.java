@@ -7,22 +7,67 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import entrenador.Entrenador1;
+
 
 public class Combate {
 
     //Atributos
+    private Entrenador1 eJugador;
+    private Entrenador1 eRival;
+    private Entrenador1 eGanador;
+    private int pokemonKoJugador;
+    private int pokemonKoRival;
     private List<Turno> turnos;
     public static final String PATH="./log/combate.log";
 
     //Constructor
     //Creamos un combate pasandole un turno
-    public Combate(){
+    public Combate(Entrenador1 ejugador, Entrenador1 eRival){
+        this.eJugador = ejugador;
+        this.eRival = eRival;
+        this.eGanador = eGanador;
+        this.pokemonKoJugador = pokemonKoJugador;
+        this.pokemonKoRival = pokemonKoRival;
         turnos = new LinkedList<>();
 
     }
 
+    public Entrenador1 geteJugador() {
+        return eJugador;
+    }
+    public Entrenador1 geteRival() {
+        return eRival;
+    }
+    public Entrenador1 geteGanador() {
+        return eGanador;
+    }
+    public int getPokemonKoJugador() {
+        return pokemonKoJugador;
+    }
+    public int getPokemonKoRival() {
+        return pokemonKoRival;
+    }
     public List<Turno> getTurnos() {
         return turnos;
+    }
+    public void seteJugador(Entrenador1 eJugador) {
+        this.eJugador = eJugador;
+    }
+    public void setPokemonKoRival(int pokemonKoRival) {
+        this.pokemonKoRival = pokemonKoRival;
+    }
+    public void seteGanador(Entrenador1 eGanador) {
+        this.eGanador = eGanador;
+    }
+    public void setPokemonKoJugador(int pokemonKoJugador) {
+        this.pokemonKoJugador = pokemonKoJugador;
+    }
+    public void seteRival(Entrenador1 eRival) {
+        this.eRival = eRival;
+    }
+    public void setTurnos(List<Turno> turnos) {
+        this.turnos = turnos;
     }
     //Metodo para añadir un turno
     public void addTurno(Turno t){
