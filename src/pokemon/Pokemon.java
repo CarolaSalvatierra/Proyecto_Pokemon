@@ -267,12 +267,8 @@ public class Pokemon {
 
     }
 
-<<<<<<< HEAD
-}
-=======
     public void comprobarVentaja(MovimientoAtaque mv, Pokemon pokemon){
 
     }
 
 }
->>>>>>> clase_pokemon
