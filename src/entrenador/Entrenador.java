@@ -3,11 +3,12 @@ package entrenador;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import pokemon.Pokemon;
 
-public class Entrenador1 {
-
+public class Entrenador {
+    
     //Atributos
     private String nombreE;
     private int cont =0;
@@ -16,16 +17,16 @@ public class Entrenador1 {
     private List<Pokemon> equipo2;//Equipo secundario
     // cont =0 primera posicion le metemos un new pokemon q se gerera en el Constructor de p9okemon
 	// constructor con el nivel q tenga
-    //cont=0 le ponemos el 1er pokemon 
-    public Entrenador1(String nombreE, ArrayList<Pokemon>equipo1, ArrayList<Pokemon>equipo2){
+   
+    public Entrenador(String nombreE, ArrayList<Pokemon>equipo1, ArrayList<Pokemon>equipo2){
         this.nombreE = nombreE;
-        this.equipo1 = new LinkedList<Pokemon>();
-        this.equipo2 = new LinkedList<Pokemon>();
+        this.equipo1 = new ArrayList<Pokemon>();
+        this.equipo2 = new ArrayList<Pokemon>();
     //  this.pokedolars = pokedolars;//Esto es necesario?
         cont++; //para que vaya poniendo los pokemon en las posiciones de los equipos
         
     }
-   
+ 
     public String getNombreE() {
         return nombreE;
     }
@@ -65,6 +66,7 @@ public class Entrenador1 {
             return false;
         }
         else if(this.equipo1.size() > 2){
+            this.equipo2.add(pokemon);
             this.equipo1.remove(1);
             System.out.println("Has movido un poquemon");
             return true;
@@ -78,8 +80,8 @@ public class Entrenador1 {
             System.out.println("El equipo esta completo, no puedes mover a un pokemon");
             return false;
         }
-        else if(this.equipo1.size()< 4){
-            this.equipo2.remove(1);
+        else if(this.equipo1.size() < 4){
+            this.equipo2.remove(pokemon);
             System.out.println("Has movido un pokemon");
             return true;
         }
@@ -96,15 +98,15 @@ public class Entrenador1 {
 		}
     }
     // Metodo que se llama cuando un entrenador trata de capturar a un pokemon,
-	// devuelve un booleano confirmando si lo ha capturado o no y solo lo capturara si existe
+	// devuelve un boolean confirmando si lo ha capturado o no y solo lo capturara si existe
 	// hueco en el equipo ?? Equipo 1 o 2, en cual metemos a los capturados??
     //No se como hacer lo de la ventana con un boton para capturar de manera aleatoria
 	public boolean captura(Pokemon enemigo) {
-        
+        Random rn = new Random();
         boolean capturado = false;
 
 		if (enemigo.getVitalidad() <= 20) {// Esto es inventado, si la vida del enemigo es menor o igual q 20 lo capturamos
-                equipo2.size(); = enemigo; // Metemos al enemigo
+             //   equipo2.size()= enemigo; // Metemos al enemigo
 				capturado = true;
 				cont++;
 
@@ -114,21 +116,20 @@ public class Entrenador1 {
 		}
 		return capturado;//nos devuelve true si lo hemos capturado, false si No 
 	}
-    //Metodo que muestra los pokemon que tenemos en el equipo junto con sus caracteristicas
+/*    //Metodo que muestra los pokemon que tenemos en el equipo junto con sus caracteristicas
 	public void mostrarEquipos(){
 		System.out.println("Tienes: "+cont+" Pokémon en el Equipo 1 ");
         for(int i = 0; i < cont; i++){
-        System.out.println("Nº: "+i+" Nivel: "+equipo1[i].getNivel()+" Vida: "+equipo1[i].getVitalidad());
+        System.out.println("Nº: "+i+" Nivel: "+equipo1.addAll(e).getNivel()+" Vida: "+equipo1[i].getVitalidad());
         }
 		
         System.out.println("Tienes: "+cont+" Pokémon en el Equipo 2 ");
 		for(int i = 0; i < cont; i++){
 			System.out.println("Nº: "+i+" Nivel: "+equipo2[i].getNivel()+" Vida: "+equipo2[i].getVitalidad());
 		}
-	}
+	}*/
 
    
 
-    
     
 }
