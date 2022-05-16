@@ -54,10 +54,10 @@ public class Pokemon {
         this.estamina= this.estaminaMax; //La estamina actual será igual a la máxima
         this.experiencia = 10 * nivel; //Experiencia necesaria para que un pokemon suba de nivel
         this.fertilidad = 5;
-        this.estado = Estado.SIN_ESTADO;
-        this.tipo = new Tipo[2];
-        this.movimientos= new Movimiento[4]; 
-        //this.mejora = mejora; 
+        this.estado = null;
+        this.tipo = tipo;
+        this.movimientos = movimientos;
+        this.mejora = null; 
         this.ventaja = Ventaja.SIN_VENTAJA;
 
     }
@@ -262,7 +262,7 @@ public class Pokemon {
 
     //Recupera toda su vitalidad y estamina, además de eliminar el estado que tuviese en ese momento.
     public void descansar(Pokemon pokemon){
-        pokemon.setEstado(Estado.SIN_ESTADO);
+        pokemon.setEstado(null);
         this.vitalidad = this.vitalidadMax;
         this.estamina = this.estaminaMax;
     }

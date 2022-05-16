@@ -23,6 +23,11 @@ public abstract class MovimientoEstado extends Movimiento{
         return estado;
     }
 
+    /**
+     * Método abstracto que heredarán los diferentes tipos de MovimientoEstado, que cambiará el
+     * estado del pokemon afectado.
+     * @param pokemon pokemon que será afectado por el estado.
+     */
     public abstract void efectoEstado(Pokemon pokemon);
 
     
