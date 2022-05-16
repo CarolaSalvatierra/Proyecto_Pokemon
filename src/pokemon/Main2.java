@@ -1,7 +1,7 @@
 package pokemon;
 
-import Enum.Tipo;
-import Enum.TipoMovimiento;
+import enumerado.Tipo;
+import enumerado.TipoMovimiento;
 
 
 public class Main2 {

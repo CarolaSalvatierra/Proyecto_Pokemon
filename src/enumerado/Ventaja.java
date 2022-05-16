@@ -1,4 +1,4 @@
-package Enum;
+package enumerado;
 
 public enum Ventaja {
     EFECTIVO,
