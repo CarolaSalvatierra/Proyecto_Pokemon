@@ -21,7 +21,11 @@ public class Main2 {
         1, tipos, movimientos);
 
 
-        System.out.println(n1.getMovimientos()[0].getNombreMov());
+        ((MovimientoMejora)n1.getMovimientos()[1]).efectoMejora(n1);
+
+        System.out.println(n1.getMejora());
+
+
         System.out.println(n1.getExperiencia());
 
         n1.subirNivel(5);
