@@ -63,29 +63,29 @@ public class Entrenador {
         boolean movido = false;
         if(this.equipo1.size() < 2 ){
             System.out.println("No puedes mover un pokemon");
-            return false;
+            movido = false;
         }
         else if(this.equipo1.size() > 2){
             this.equipo2.add(pokemon);
             this.equipo1.remove(1);
             System.out.println("Has movido un poquemon");
-            return true;
+            movido =  true;
         }
-        return true;
+        return movido;
     }
     //Metodo para movel al pokemon del equipo secundario al principal
     public boolean moverPokemonE1(Pokemon pokemon){
         boolean movido = false;
         if(this.equipo1.size() == 4){
             System.out.println("El equipo esta completo, no puedes mover a un pokemon");
-            return false;
+            movido = false;
         }
         else if(this.equipo1.size() < 4){
             this.equipo2.remove(pokemon);
             System.out.println("Has movido un pokemon");
-            return true;
+            movido = true;
         }
-        return true;
+        return movido;
     }
     // Se elige a un pokemon del equipo1 en funcion del indice recibido (i) y se
 	// devuelve, si el indice no se encuentra en el vector se devuelve null
