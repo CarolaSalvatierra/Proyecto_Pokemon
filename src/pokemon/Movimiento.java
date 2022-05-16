@@ -1,6 +1,6 @@
 package pokemon;
 
-import Enum.Tipo;
+import enumerado.Tipo;
 
 public abstract class Movimiento {
     protected static String nombreMov;

@@ -3,11 +3,11 @@ package pokemon;
 import java.util.HashMap;
 import java.util.Random;
 
-import Enum.Estado;
-import Enum.Tipo;
-import Enum.TipoMovimiento;
-import Enum.Ventaja;
-import Enum.Mejora;
+import enumerado.Estado;
+import enumerado.Mejora;
+import enumerado.Tipo;
+import enumerado.TipoMovimiento;
+import enumerado.Ventaja;
 
 public class Pokemon {
 

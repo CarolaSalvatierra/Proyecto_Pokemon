@@ -1,7 +1,7 @@
 package pokemon;
 
-import Enum.Tipo;
-import Enum.Estado;
+import enumerado.Estado;
+import enumerado.Tipo;
 
 public class MovimientoEstadoQuemadura extends MovimientoEstado{
 

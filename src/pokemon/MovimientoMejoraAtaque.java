@@ -1,7 +1,7 @@
 package pokemon;
 
-import Enum.Tipo;
-import Enum.Mejora;
+import enumerado.Mejora;
+import enumerado.Tipo;
 
 public class MovimientoMejoraAtaque extends MovimientoMejora{
 
