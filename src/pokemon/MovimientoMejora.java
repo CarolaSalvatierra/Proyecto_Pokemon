@@ -3,7 +3,7 @@ package pokemon;
 import enumerado.Mejora;
 import enumerado.Tipo;
 
-public abstract class MovimientoMejora extends Movimiento{
+public class MovimientoMejora extends Movimiento{
 
     private Mejora mejora;
     private int numeroTurnos;
@@ -23,12 +23,5 @@ public abstract class MovimientoMejora extends Movimiento{
     public int getNumeroTurnos() {
         return numeroTurnos;
     }
-
-     /**
-     * Método abstracto que heredarán los diferentes tipos de MovimientoMejora, que cambiará el
-     * estado del pokemon afectado.
-     * @param pokemon pokemon que será afectado por el estado.
-     */
-    public abstract void efectoMejora(Pokemon pokemon);
     
 }

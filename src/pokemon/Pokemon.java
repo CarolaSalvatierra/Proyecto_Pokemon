@@ -172,6 +172,76 @@ public class Pokemon {
 
     //Métodos de acción
 
+
+    /**
+     * Método que, dependiendo de la mejora del movimiento usado, cambiará el parámetro Mejora de del mismo pokémon que lo use.
+     * @param mv movimiento utilizado
+     */
+    public void mejorarPokemon(MovimientoMejora mv){
+        if (mv.getEstamina() < this.estamina){
+            System.out.println("No hay suficiente estamina para realizar el movimiento");
+            return;
+
+        } else {
+
+            this.estamina -= mv.getEstamina();
+            
+            switch (mv.getMejora()){
+                case ATAQUE:
+                    this.mejora = Mejora.ATAQUE;
+                    break;
+                case ATAQUEES:
+                    this.mejora = Mejora.ATAQUEES;
+                    break;
+                case DEFENSA:
+                    this.mejora = Mejora.DEFENSA;
+                    break;
+                case DEFENSAES:
+                    this.mejora = Mejora.DEFENSAES;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Método que, dependiendo del estado del movimiento usado, cambiará el parámetro Estado del pokémon rival.
+     * @param mv movimiento utilizado
+     * @param pokemon pokémon al que se le aplicará el estado.
+     */
+    public void aplicarEstado(MovimientoEstado mv, Pokemon pokemon){
+        //Dependiendo del Estado del movimiento, llamará a una u otra clase.
+        if (mv.getEstamina() < this.estamina){
+            System.out.println("No hay suficiente estamina para realizar el movimiento");
+            return;
+
+        } else {
+
+            this.estamina -= mv.getEstamina();
+
+            switch (mv.getEstado()){
+                case PARALIZADO:
+                    ((MovimientoEstadoParalizado)mv).efectoEstado(pokemon);
+                    break;
+                case DORMIDO:
+                    ((MovimientoEstadoDormido)mv).efectoEstado(pokemon);
+                    break;
+                case QUEMADO:
+                    ((MovimientoEstadoDormido)mv).efectoEstado(pokemon);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Método que realizará una acción de disminución del parámetro vitalidad del pokémon rival. Si la habilidad a usar requiere una
+     * cantidad superior a la actual, el ataque no podrá realizarse.
+     * @param mv
+     * @param pokemon
+     */
     public void atacarPokemon(MovimientoAtaque mv, Pokemon pokemon){
         float efc = 1;
         float danio = 0;
@@ -183,12 +253,17 @@ public class Pokemon {
 
         //Si la estamina del pokemon menos la estamina requerida por el movimiento es menor que 0, el pokemon no será
         //capaz de realizarlo.
-        if (this.estado == Estado.PARALIZADO || this.estado == Estado.DORMIDO){
-           System.out.println("¡El pokémon es incapaz de realizar una acción!");
+        if (mv.getEstamina() < this.estamina){
+            System.out.println("No hay suficiente estamina para realizar el movimiento");
+            return;
+
         } else {
+
+            this.estamina -= mv.getEstamina();
 
             if (this.estamina - mv.getEstamina() < 0){
                 System.out.println("No hay suficiente estamina para realizar el movimiento");
+                return;
 
             } else {
                 this.estamina -= mv.getEstamina();
