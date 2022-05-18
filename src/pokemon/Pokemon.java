@@ -253,7 +253,7 @@ public class Pokemon {
 
         //Si la estamina del pokemon menos la estamina requerida por el movimiento es menor que 0, el pokemon no será
         //capaz de realizarlo.
-        if (mv.getEstamina() < this.estamina){
+        if (mv.getEstamina() > this.estamina){
             System.out.println("No hay suficiente estamina para realizar el movimiento");
             return;
 
@@ -261,70 +261,61 @@ public class Pokemon {
 
             this.estamina -= mv.getEstamina();
 
-            if (this.estamina - mv.getEstamina() < 0){
-                System.out.println("No hay suficiente estamina para realizar el movimiento");
-                return;
+            comprobarVentaja(mv, pokemon);
 
-            } else {
-                this.estamina -= mv.getEstamina();
+            //Valor del operador efc de la fórmula final del daño.
+             switch (this.ventaja){
+                case EFECTIVO:
+                    efc = 2f;
+                    break;
+                case NO_EFECTIVO:
+                    efc = 0.5f;
+                    break;
+                default:
+                    break;
+             }
 
-                comprobarVentaja(mv, pokemon);
-
-                //Valor del operador efc de la fórmula final del daño.
-                switch (this.ventaja){
-                    case EFECTIVO:
-                        efc = 2f;
-                        break;
-                    case NO_EFECTIVO:
-                        efc = 0.5f;
-                        break;
-                    default:
-                        break;
-                }
-
-                //Valor del operador mejora para la potencia del usuario de la fórmula final del daño.
-                switch (this.mejora){
-                    case ATAQUE:
-                        mejoraUsAt = 2;
-                        break;
-                    case ATAQUEES:
-                        mejoraUsAtS = 2;
-                        break;
-                    default:
-                        break;
-                }
-
-                //Valor del operador mejora para la defensa del rival de la fórmula final del daño.
-                switch (pokemon.getMejora()){
-                    case DEFENSA:
-                        mejoraPokDef = 2;
-                        break;
-                    case DEFENSAES:
-                        mejoraPokDS = 2;
-                        break;
-                    default:
-                        break;
-                }
-
-                //Valor del daño que recibirá si tiene el estado Quemadura. Se sumará al llamar al método actualizarVitDamage.
-                if (this.estado == Estado.QUEMADO){
-                    estado = (pokemon.getVitalidadMax() * 15) / 100;
-                }
-
-                //Si el movimiento es físico, la operación del daño usará la defensa del pokémon rival. Si es especial, la fórmula será 
-                //con la defensa especial del pokémon rival.
-                if (mv.getTMovimiento() == TipoMovimiento.FISICO){
-                    danio = ((mv.getPotencia() * mejoraUsAt ) * efc + this.ataque - (pokemon.getDefensa()  *  mejoraPokDef ));
-                } else {
-                    danio = ((mv.getPotencia() * mejoraUsAtS ) * efc + this.ataqueS - pokemon.getDefensaS()  *  mejoraPokDS );
-
-                }
-
-
-                actualizarVITDamage(danio + estado, pokemon);
+            //Valor del operador mejora para la potencia del usuario de la fórmula final del daño.
+            switch (this.mejora){
+                case ATAQUE:
+                    mejoraUsAt = 2;
+                    break;
+                case ATAQUEES:
+                    mejoraUsAtS = 2;
+                    break;
+                default:
+                     break;
             }
+
+            //Valor del operador mejora para la defensa del rival de la fórmula final del daño.
+            switch (pokemon.getMejora()){
+                case DEFENSA:
+                    mejoraPokDef = 2;
+                    break;
+                case DEFENSAES:
+                    mejoraPokDS = 2;
+                    break;
+                default:
+                    break;
+            }
+
+            //Valor del daño que recibirá si tiene el estado Quemadura. Se sumará al llamar al método actualizarVitDamage.
+            if (this.estado == Estado.QUEMADO){
+                estado = (pokemon.getVitalidadMax() * 15) / 100;
+            }
+
+            //Si el movimiento es físico, la operación del daño usará la defensa del pokémon rival. Si es especial, la fórmula será 
+            //con la defensa especial del pokémon rival.
+            if (mv.getTMovimiento() == TipoMovimiento.FISICO){
+                danio = ((mv.getPotencia() * mejoraUsAt ) * efc + this.ataque - (pokemon.getDefensa()  *  mejoraPokDef ));
+            } else {
+                danio = ((mv.getPotencia() * mejoraUsAtS ) * efc + this.ataqueS - pokemon.getDefensaS()  *  mejoraPokDS );
+
+            }
+
+
+            actualizarVITDamage(danio + estado, pokemon);
         }
-        
     }
 
     public void actualizarVITDamage(float danio, Pokemon pokemon){
