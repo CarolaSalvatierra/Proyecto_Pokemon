@@ -5,6 +5,7 @@ public enum Mejora {
     DEFENSA,
     ATAQUEES,
     DEFENSAES,
-    VELOCIDAD
+    VELOCIDAD,
+    SIN_MEJORA
 
 }
