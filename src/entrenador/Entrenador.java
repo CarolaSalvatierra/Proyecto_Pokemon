@@ -59,33 +59,32 @@ public class Entrenador {
         equipo1.add(pokemon);
     }
     /*Metodo para mover pokemon al equipo secundario */
-    public boolean moverPokemonE2(Pokemon pokemon){
-        boolean movido = false;
+    public String moverPokemonE2(Pokemon pokemon){
+      
+       String mensaje = "";
         if(this.equipo1.size() < 2 ){
-            System.out.println("No puedes mover un pokemon");
-            return false;
+            mensaje = "No puedes mover un pokemon";           
         }
         else if(this.equipo1.size() > 2){
             this.equipo2.add(pokemon);
-            this.equipo1.remove(1);
-            System.out.println("Has movido un poquemon");
-            return true;
-        }
-        return true;
+            this.equipo1.remove(pokemon);
+            mensaje = "Has movido un poquemon";     
+           }
+        return mensaje;
     }
     //Metodo para movel al pokemon del equipo secundario al principal
-    public boolean moverPokemonE1(Pokemon pokemon){
-        boolean movido = false;
+    public String moverPokemonE1(Pokemon pokemon){
+        String mensaje = "";
         if(this.equipo1.size() == 4){
-            System.out.println("El equipo esta completo, no puedes mover a un pokemon");
-            return false;
+            mensaje = "El equipo esta completo, no puedes mover a un pokemon";
+            return mensaje;
         }
         else if(this.equipo1.size() < 4){
             this.equipo2.remove(pokemon);
-            System.out.println("Has movido un pokemon");
-            return true;
+            mensaje = "Has movido un pokemon";
+            return mensaje;
         }
-        return true;
+        return mensaje;
     }
     // Se elige a un pokemon del equipo1 en funcion del indice recibido (i) y se
 	// devuelve, si el indice no se encuentra en el vector se devuelve null
@@ -102,18 +101,20 @@ public class Entrenador {
 	// hueco en el equipo ?? Equipo 1 o 2, en cual metemos a los capturados??
     //No se como hacer lo de la ventana con un boton para capturar de manera aleatoria
 	public boolean captura(Pokemon enemigo) {
-        Random rn = new Random();
+        Random aleatorio = new Random();
+        int numero;
         boolean capturado = false;
-
+        for(int contador = 0; contador < 4;contador ++){
+            numero = aleatorio.nextInt(3);
 		if (enemigo.getVitalidad() <= 20) {// Esto es inventado, si la vida del enemigo es menor o igual q 20 lo capturamos
-             //   equipo2.size()= enemigo; // Metemos al enemigo
-				capturado = true;
-				cont++;
+               equipo2.add(enemigo); // Metemos al enemigo
+                capturado = true;
 
 				System.out.println("Has capturado un nuevo Pokemon!");
 		} else {
 			System.out.println("Imposible de capturar.");
 		}
+    }
 		return capturado;//nos devuelve true si lo hemos capturado, false si No 
 	}
 /*    //Metodo que muestra los pokemon que tenemos en el equipo junto con sus caracteristicas
