@@ -1,7 +1,6 @@
 package entrenador;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -13,15 +12,15 @@ public class Entrenador {
     private String nombreE;
     private int cont =0;
     private int pokedolars;
-    private List<Pokemon>equipo1;//Equipo principal
+    private List<Pokemon> equipo1;//Equipo principal
     private List<Pokemon> equipo2;//Equipo secundario
     // cont =0 primera posicion le metemos un new pokemon q se gerera en el Constructor de p9okemon
 	// constructor con el nivel q tenga
    
     public Entrenador(String nombreE, ArrayList<Pokemon>equipo1, ArrayList<Pokemon>equipo2){
         this.nombreE = nombreE;
-        this.equipo1 = new ArrayList<Pokemon>();
-        this.equipo2 = new ArrayList<Pokemon>();
+        this.equipo1 = equipo1;
+        this.equipo2 = equipo2;
     //  this.pokedolars = pokedolars;//Esto es necesario?
         cont++; //para que vaya poniendo los pokemon en las posiciones de los equipos
         
@@ -58,34 +57,35 @@ public class Entrenador {
     public void agregarPokemo(Pokemon pokemon){
         equipo1.add(pokemon);
     }
-    /*Metodo para mover pokemon al equipo secundario */
-    public boolean moverPokemonE2(Pokemon pokemon){
-        boolean movido = false;
-        if(this.equipo1.size() < 2 ){
-            System.out.println("No puedes mover un pokemon");
-            return false;
+
+    //Metodo para mover pokemon al equipo secundario
+    public String moverPokemonE2(Pokemon pokemon){
+      
+       String mensaje = "";
+        if (this.equipo1.size() <= 1 ){
+            mensaje = "No puedes mover un pokemon";           
         }
-        else if(this.equipo1.size() > 2){
+        else if (this.equipo1.size() >= 2){
             this.equipo2.add(pokemon);
-            this.equipo1.remove(1);
-            System.out.println("Has movido un poquemon");
-            return true;
-        }
-        return true;
+            this.equipo1.remove(pokemon);
+            mensaje = "Has movido un pokémon.";     
+           }
+        return mensaje;
     }
+
     //Metodo para movel al pokemon del equipo secundario al principal
-    public boolean moverPokemonE1(Pokemon pokemon){
-        boolean movido = false;
+    public String moverPokemonE1(Pokemon pokemon){
+
+        String mensaje = "";
         if(this.equipo1.size() == 4){
-            System.out.println("El equipo esta completo, no puedes mover a un pokemon");
-            return false;
+            mensaje = "El equipo esta completo, no puedes mover a un pokemon";
         }
         else if(this.equipo1.size() < 4){
+            this.equipo1.add(pokemon);
             this.equipo2.remove(pokemon);
-            System.out.println("Has movido un pokemon");
-            return true;
+            mensaje = "Has movido un pokemon";
         }
-        return true;
+        return mensaje;
     }
     // Se elige a un pokemon del equipo1 en funcion del indice recibido (i) y se
 	// devuelve, si el indice no se encuentra en el vector se devuelve null
@@ -97,24 +97,27 @@ public class Entrenador {
 			return null;
 		}
     }
-    // Metodo que se llama cuando un entrenador trata de capturar a un pokemon,
-	// devuelve un boolean confirmando si lo ha capturado o no y solo lo capturara si existe
-	// hueco en el equipo ?? Equipo 1 o 2, en cual metemos a los capturados??
-    //No se como hacer lo de la ventana con un boton para capturar de manera aleatoria
-	public boolean captura(Pokemon enemigo) {
-        Random rn = new Random();
-        boolean capturado = false;
+    
+    /**
+     * Método para capturar un pokémon, teniendo 2/3 de probabilidades de captura. Si en 10 intentos no se captura, 
+     * se rompe el bucle y la captura finaliza.
+     * @param pokemon variable de tipo Pokemon que será el pokémon de nivel 1 con estadísticas aleatorias.
+     */
+	public void captura(Pokemon pokemon) {
+        int pokeball = 10;
+        Random rm = new Random();
+        int posibilidadCap;
 
-		if (enemigo.getVitalidad() <= 20) {// Esto es inventado, si la vida del enemigo es menor o igual q 20 lo capturamos
-             //   equipo2.size()= enemigo; // Metemos al enemigo
-				capturado = true;
-				cont++;
-
-				System.out.println("Has capturado un nuevo Pokemon!");
-		} else {
-			System.out.println("Imposible de capturar.");
-		}
-		return capturado;//nos devuelve true si lo hemos capturado, false si No 
+        for (int i = 0; i < pokeball; i++){
+            posibilidadCap = rm.nextInt(3)+1;
+            if (posibilidadCap == 2){
+                this.equipo2.add(pokemon);
+                break;
+            } else {
+                System.out.println("¡" + pokemon.getNombre() + " se ha liberado!");
+            }
+        }
+        
 	}
 /*    //Metodo que muestra los pokemon que tenemos en el equipo junto con sus caracteristicas
 	public void mostrarEquipos(){

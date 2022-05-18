@@ -1,5 +1,8 @@
 package pokemon;
 
+import java.util.ArrayList;
+
+import entrenador.Entrenador;
 import enumerado.Estado;
 import enumerado.Mejora;
 import enumerado.Tipo;
@@ -22,6 +25,31 @@ public class Main2 {
 
         Pokemon n1 = new Pokemon("Prueba", "Prrueba", 80, 20, 30, 25, 15, 15, 50,
         1, tipos, movimientos);
+        Pokemon n2 = new Pokemon("Prueba2", "Prrueba2", 90, 30, 30, 25, 15, 15, 50,
+        1, tipos, movimientos);
+        Pokemon n3 = new Pokemon("Prueba3", "Prrueba3", 80, 20, 30, 25, 15, 15, 50,
+        1, tipos, movimientos);
+        Pokemon n4 = new Pokemon("Prueba4", "Prrueba4", 90, 30, 30, 25, 15, 15, 50,
+        1, tipos, movimientos);
+
+        System.out.println(n1.getMovimientos()[0].getNombreMov());
+        System.out.println(n1.getExperiencia());
+
+        n1.subirNivel(5);
+
+        //probando Entrenador
+        Entrenador jugador = new Entrenador("XXX", new ArrayList<Pokemon>(), new ArrayList<Pokemon>());
+
+        jugador.getEquipo1().add(n1);
+        jugador.getEquipo1().add(n2);
+        jugador.getEquipo1().add(n3);
+        jugador.getEquipo1().add(n4);
+
+        jugador.moverPokemonE2(n3);
+
+        jugador.captura(n2);   
+  
+        System.out.println(n1);
 
 
         n1.mejorarPokemon((MovimientoMejora)movimientos[1]);
