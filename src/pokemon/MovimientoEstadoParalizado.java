@@ -5,7 +5,7 @@ import enumerado.Tipo;
 
 public class MovimientoEstadoParalizado extends MovimientoEstado{
 
-    MovimientoEstadoParalizado(String nombreMov, Tipo tipo, Estado estado, int estamina, int numeroTurnos){
+    public MovimientoEstadoParalizado(String nombreMov, Tipo tipo, Estado estado, int estamina, int numeroTurnos){
         super(nombreMov, tipo, estado, estamina, numeroTurnos);
 
     }
