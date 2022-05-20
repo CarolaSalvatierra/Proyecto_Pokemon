@@ -119,20 +119,5 @@ public class Entrenador {
         }
         
 	}
-/*    //Metodo que muestra los pokemon que tenemos en el equipo junto con sus caracteristicas
-	public void mostrarEquipos(){
-		System.out.println("Tienes: "+cont+" Pokémon en el Equipo 1 ");
-        for(int i = 0; i < cont; i++){
-        System.out.println("Nº: "+i+" Nivel: "+equipo1.addAll(e).getNivel()+" Vida: "+equipo1[i].getVitalidad());
-        }
-		
-        System.out.println("Tienes: "+cont+" Pokémon en el Equipo 2 ");
-		for(int i = 0; i < cont; i++){
-			System.out.println("Nº: "+i+" Nivel: "+equipo2[i].getNivel()+" Vida: "+equipo2[i].getVitalidad());
-		}
-	}*/
-
-   
-
     
 }
