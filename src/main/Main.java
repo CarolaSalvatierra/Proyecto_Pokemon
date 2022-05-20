@@ -131,6 +131,9 @@ public class Main{
         //Subir de nivel y aprender movimientos
         n4.subirNivel(50, mA2);
 
+        //Ataque
+        n1.atacarPokemon(mA3, n2);
+
     }
     
 }
