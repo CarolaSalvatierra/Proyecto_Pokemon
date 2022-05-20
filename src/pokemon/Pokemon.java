@@ -2,6 +2,7 @@ package pokemon;
 
 import java.util.HashMap;
 import java.util.Random;
+import java.util.Scanner;
 
 import enumerado.Estado;
 import enumerado.Mejora;
@@ -54,10 +55,10 @@ public class Pokemon {
         this.estamina= this.estaminaMax; //La estamina actual será igual a la máxima
         this.experiencia = 10 * nivel; //Experiencia necesaria para que un pokemon suba de nivel
         this.fertilidad = 5;
-        this.estado = null;
+        this.estado = Estado.SIN_ESTADO;
         this.tipo = tipo;
         this.movimientos = movimientos;
-        this.mejora = null; 
+        this.mejora = Mejora.SIN_MEJORA; 
         this.ventaja = Ventaja.SIN_VENTAJA;
 
     }
@@ -309,7 +310,7 @@ public class Pokemon {
             if (mv.getTMovimiento() == TipoMovimiento.FISICO){
                 danio = ((mv.getPotencia() * mejoraUsAt ) * efc + this.ataque - (pokemon.getDefensa()  *  mejoraPokDef ));
             } else {
-                danio = ((mv.getPotencia() * mejoraUsAtS ) * efc + this.ataqueS - pokemon.getDefensaS()  *  mejoraPokDS );
+                danio = ((mv.getPotencia() * mejoraUsAtS ) * efc + this.ataqueS - (pokemon.getDefensaS()  *  mejoraPokDS));
 
             }
 
@@ -326,15 +327,24 @@ public class Pokemon {
     }
 
 
-    //Recupera toda su vitalidad y estamina, además de eliminar el estado que tuviese en ese momento.
+    /**
+     * Recupera toda su vitalidad y estamina, además de eliminar el estado que tuviese en ese momento.
+     * @param pokemon pokemon que será recuperado por completo.
+     */
     public void descansar(Pokemon pokemon){
-        pokemon.setEstado(null);
+        pokemon.setEstado(Estado.SIN_ESTADO);
         this.vitalidad = this.vitalidadMax;
         this.estamina = this.estaminaMax;
     }
 
-    //Creo que esto podría hacerse de una forma más eficiente pero ahora mismo no tengo ni idea.
-    public void subirNivel(int exp){
+    /**
+     * Método que se utiliza para cambiar el parámetro this.experiencia. Recibe un int "experiencia", y esta se le restará a la 
+     * experiencia actual del pokémon, mostrando la experiencia restante necesaria para subir de nivel. En el caso de que suba y la variable
+     * sea negativa, significa que ha sobrado experiencia, por lo que se cambia a positivo y se repetirá el bucle para asimilar esta.
+     * @param exp parámetro de experiencia obtenida en combate.
+     * @param movimiento movimiento que aprenderá el pokémon solo si el nivel que acaba de subir es par.
+     */
+    public void subirNivel(int exp, Movimiento movimiento){
         boolean subirNivel = false; 
         do{
             System.out.println("Experiencia obtenida: " + exp);
@@ -353,6 +363,10 @@ public class Pokemon {
                 this.defensaS += rm.nextInt(5) + 1;
                 this.velocidad += rm.nextInt(5) + 1;
                 this.experiencia = 10 * nivel;
+
+                if (this.nivel % 2 == 0) {
+                    aprenderAtaque(movimiento);
+                }
                 
 
             } else {
@@ -366,8 +380,13 @@ public class Pokemon {
         }while (subirNivel == true);
     }
 
-    public void aprenderAtaque(Pokemon pokemon, Movimiento movimiento){
-        Random rm = new Random();
+    /**
+     * El pokémon aprende un movimiento. Si tiene los 4 huecos ocupados, sobreescribirá uno de ellos por el nuevo.
+     * @param pokemon
+     * @param movimiento
+     */
+    public void aprenderAtaque(Movimiento movimiento){
+        Scanner sc = new Scanner(System.in);
 
         for (int i = 0; i <= this.movimientos.length - 1; i++){
             if (this.movimientos[i] == null){
@@ -376,15 +395,20 @@ public class Pokemon {
             }
             
             //Si el contador llega a ser igual que el tamaño del array y no ha encontrado ninguna celda nula en el array, no se habrá forzado al bucle a 
-            //romperse, por lo que se sustituirá un movimiento ya aprendido al azar por el nuevo a aprender.
-            //Otra forma de hacerlo sería dando opción al usuario de elegir si desea sustituir alguna de los movimientos ya aprendidos por el
-            //nuevo o no, pero creo que hasta que no aprendamos a representarlo gráficamente, se quedará así.
+            //romperse, por lo que se sustituirá un movimiento ya aprendido por el nuevo a aprender, según desee el usuario.
             if (i == this.movimientos.length - 1){
-                int m = rm.nextInt(3);
+                System.out.println("Elige un movimiento que olvidar: \n1 " + this.movimientos[0].getNombreMov() + "\n2 " + this.movimientos[1].getNombreMov()
+                + "\n3 " + this.movimientos[2].getNombreMov() + "\n4 " + this.movimientos[3].getNombreMov());
+                int m = sc.nextInt();
                 this.movimientos[m] = movimiento;
             }
 
+
         }
+        sc.close();
+
+        System.out.println("Nuevos movimientos: \n1 " + this.movimientos[0].getNombreMov() + "\n2 " + this.movimientos[1].getNombreMov()
+                + "\n3 " + this.movimientos[2].getNombreMov() + "\n4 " + this.movimientos[3].getNombreMov());
 
     }
 

@@ -3,14 +3,14 @@ package pokemon;
 import enumerado.Tipo;
 
 public abstract class Movimiento {
-    protected static String nombreMov;
-    protected static Tipo tipo;
-    protected static int estamina;
+    protected String nombreMov;
+    protected Tipo tipo;
+    protected int estamina;
 
     public Movimiento(String nombreMov, Tipo tipo, int estamina){
-        Movimiento.nombreMov = nombreMov;
-        Movimiento.tipo = tipo;
-        Movimiento.estamina = estamina;
+        this.nombreMov = nombreMov;
+        this.tipo = tipo;
+        this.estamina = estamina;
 
     }
 
