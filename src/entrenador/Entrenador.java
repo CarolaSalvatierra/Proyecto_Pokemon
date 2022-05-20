@@ -7,15 +7,16 @@ import java.util.Random;
 import pokemon.Pokemon;
 
 public class Entrenador {
+
+     //Atributos
+     private String nombreE;
+     private int cont =0;
+     private int pokedolars;
+     private List<Pokemon>equipo1;//Equipo principal
+     private List<Pokemon> equipo2;//Equipo secundario
+     // cont =0 primera posicion le metemos un new pokemon q se gerera en el Constructor de p9okemon
+     // constructor con el nivel q tenga
     
-    //Atributos
-    private String nombreE;
-    private int cont =0;
-    private int pokedolars;
-    private List<Pokemon>equipo1;//Equipo principal
-    private List<Pokemon> equipo2;//Equipo secundario
-    // cont =0 primera posicion le metemos un new pokemon q se gerera en el Constructor de p9okemon
-	// constructor con el nivel q tenga
    
     public Entrenador(String nombreE, ArrayList<Pokemon>equipo1, ArrayList<Pokemon>equipo2){
         this.nombreE = nombreE;
