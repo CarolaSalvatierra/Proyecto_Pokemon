@@ -119,6 +119,10 @@ public class Combate {
      */
     public void combatir(Entrenador eJugador, Entrenador eRival, Pokemon pokemonJugador, Pokemon pokemonRival) {
 
+        Scanner sc = new Scanner(System.in);
+        Random rnd = new Random();
+
+        int opcion = 0;
         int indiceJugador = 0;
         int indiceRival = 0;
         int velocidadMejJugador = 1;
@@ -126,15 +130,26 @@ public class Combate {
 
         while (indiceJugador != 4 && indiceRival != 4) {
 
-            System.out.println("Introduce una opcion de ataque ");
-            System.out.println("1. " + pokemonJugador.getMovimientos()[0].getNombreMov() +
-                    "\n 2." + pokemonJugador.getMovimientos()[1].getNombreMov() + "\n 3. " +
-                    pokemonJugador.getMovimientos()[2].getNombreMov() +
-                    "\n 4." + pokemonJugador.getMovimientos()[3].getNombreMov());
-
-            Scanner sc = new Scanner(System.in);
-            Random rnd = new Random();
-            int opcion = sc.nextInt();
+            while (true){
+                System.out.println("Introduce una opcion de ataque ");
+                System.out.println("1. " + pokemonJugador.getMovimientos()[0].getNombreMov());
+                if (pokemonJugador.getMovimientos()[1] != null){
+                    System.out.println("1. " + pokemonJugador.getMovimientos()[1].getNombreMov());
+                }
+                if (pokemonJugador.getMovimientos()[2] != null){
+                    System.out.println("1. " + pokemonJugador.getMovimientos()[2].getNombreMov());
+                }
+                if (pokemonJugador.getMovimientos()[3] != null){
+                    System.out.println("1. " + pokemonJugador.getMovimientos()[3].getNombreMov());
+                }
+                
+                opcion = sc.nextInt();
+                if (opcion < 0 || opcion > 3){
+                    System.out.println("Elija movimiento válido.");
+                } else {
+                    break;
+                }
+            }
             int opcionRival = rnd.nextInt(3);
 
             Movimiento mA = pokemonJugador.getMovimientos()[opcion];

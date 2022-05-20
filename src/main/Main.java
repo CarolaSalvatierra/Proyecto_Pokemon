@@ -134,7 +134,7 @@ public class Main{
         n4.subirNivel(50, mA2);
 
         //Ataque
-        n1.atacarPokemon(mA3, n2);
+        //n1.atacarPokemon(mA3, n2);
 
          //Creamos un combate
          Entrenador entrenadorRival = new Entrenador("Carola", equipo1, equipo2);
@@ -143,7 +143,7 @@ public class Main{
          Combate c1 = new Combate(entrenador, entrenadorRival);
          Combate c2 = new Combate(entrenador2, entrenadorRival2);
 
-         c1.combatir(entrenador, entrenadorRival, n1, n2);
+         c1.combatir(entrenador, entrenadorRival, entrenador2.getEquipo1().get(0), entrenadorRival.getEquipo1().get(0));
          c2.combatir(entrenador2, entrenadorRival2, n3, n4);
 
          c1.getGanador().getNombreE();
@@ -154,7 +154,6 @@ public class Main{
          //Creamos turno
          Turno t1 = new Turno(1, "Pikachu utiliza ataque electrico","Charmander usa lanzallamas" );
          Turno t2 = new Turno(3, "Snorlax lanza hiperrayo", "Squirtle usa Placaje");
-         Turno t3 = new Turno(2, "Charmander usa Ascuas","Squirtle usa Burbuja" );
         
          //Añadimos el turno
          c1.addTurno(t1);
