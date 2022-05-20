@@ -1,7 +1,5 @@
 package pokemon;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -11,7 +9,7 @@ import enumerado.Tipo;
 import enumerado.TipoMovimiento;
 import enumerado.Ventaja;
 
-public class Pokemon {
+public class Pokemon extends Debilidades{
 
     //Atributos de la clase Pokemon
 
@@ -317,13 +315,14 @@ public class Pokemon {
 
 
             actualizarVITDamage(danio + estado, pokemon);
+            this.ventaja = Ventaja.SIN_VENTAJA;
         }
     }
 
     public void actualizarVITDamage(float danio, Pokemon pokemon){
         float actVIT = (int) pokemon.getVitalidad() - danio;
 
-        setVitalidad(actVIT);
+        pokemon.setVitalidad(actVIT);
 
     }
 
@@ -400,7 +399,7 @@ public class Pokemon {
             if (i == this.movimientos.length - 1){
                 System.out.println("Elige un movimiento que olvidar: \n1 " + this.movimientos[0].getNombreMov() + "\n2 " + this.movimientos[1].getNombreMov()
                 + "\n3 " + this.movimientos[2].getNombreMov() + "\n4 " + this.movimientos[3].getNombreMov());
-                int m = sc.nextInt();
+                int m = sc.nextInt() - 1;
                 this.movimientos[m] = movimiento;
             }
 
@@ -413,90 +412,22 @@ public class Pokemon {
 
     }
 
+    /**
+     * Comprueba si el tipo del movimiento es efectivo o no contra alguno de los tipos del rival.
+     * @param mv el movimiento realizado.
+     * @param pokemon el pokémon rival.
+     */
     public void comprobarVentaja(MovimientoAtaque mv, Pokemon pokemon){
-        Map<Tipo, Map<Tipo, Ventaja>> comprobarV = new HashMap<Tipo, Map<Tipo, Ventaja>>();
 
-        //Tipo Agua
-        comprobarV.put(Tipo.AGUA, new HashMap<Tipo, Ventaja>(){{put(Tipo.AGUA, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.AGUA, new HashMap<Tipo, Ventaja>(){{put(Tipo.FUEGO, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.AGUA, new HashMap<Tipo, Ventaja>(){{put(Tipo.PLANTA, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.AGUA, new HashMap<Tipo, Ventaja>(){{put(Tipo.BICHO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.AGUA, new HashMap<Tipo, Ventaja>(){{put(Tipo.VOLADOR, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.AGUA, new HashMap<Tipo, Ventaja>(){{put(Tipo.ELECTRICO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.AGUA, new HashMap<Tipo, Ventaja>(){{put(Tipo.TIERRA, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.AGUA, new HashMap<Tipo, Ventaja>(){{put(Tipo.NORMAL, Ventaja.SIN_VENTAJA);}});
-
-        //Tipo Fuego
-        comprobarV.put(Tipo.FUEGO, new HashMap<Tipo, Ventaja>(){{put(Tipo.AGUA, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.FUEGO, new HashMap<Tipo, Ventaja>(){{put(Tipo.FUEGO, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.FUEGO, new HashMap<Tipo, Ventaja>(){{put(Tipo.PLANTA, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.FUEGO, new HashMap<Tipo, Ventaja>(){{put(Tipo.BICHO, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.FUEGO, new HashMap<Tipo, Ventaja>(){{put(Tipo.VOLADOR, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.FUEGO, new HashMap<Tipo, Ventaja>(){{put(Tipo.ELECTRICO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.FUEGO, new HashMap<Tipo, Ventaja>(){{put(Tipo.TIERRA, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.FUEGO, new HashMap<Tipo, Ventaja>(){{put(Tipo.NORMAL, Ventaja.SIN_VENTAJA);}});
-
-        //Tipo Planta
-        comprobarV.put(Tipo.PLANTA, new HashMap<Tipo, Ventaja>(){{put(Tipo.AGUA, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.PLANTA, new HashMap<Tipo, Ventaja>(){{put(Tipo.FUEGO, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.PLANTA, new HashMap<Tipo, Ventaja>(){{put(Tipo.PLANTA, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.PLANTA, new HashMap<Tipo, Ventaja>(){{put(Tipo.BICHO, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.PLANTA, new HashMap<Tipo, Ventaja>(){{put(Tipo.VOLADOR, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.PLANTA, new HashMap<Tipo, Ventaja>(){{put(Tipo.ELECTRICO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.PLANTA, new HashMap<Tipo, Ventaja>(){{put(Tipo.TIERRA, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.PLANTA, new HashMap<Tipo, Ventaja>(){{put(Tipo.NORMAL, Ventaja.NO_EFECTIVO);}});
-
-        //Tipo Bicho
-        comprobarV.put(Tipo.BICHO, new HashMap<Tipo, Ventaja>(){{put(Tipo.AGUA, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.BICHO, new HashMap<Tipo, Ventaja>(){{put(Tipo.FUEGO, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.BICHO, new HashMap<Tipo, Ventaja>(){{put(Tipo.PLANTA, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.BICHO, new HashMap<Tipo, Ventaja>(){{put(Tipo.BICHO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.BICHO, new HashMap<Tipo, Ventaja>(){{put(Tipo.VOLADOR, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.BICHO, new HashMap<Tipo, Ventaja>(){{put(Tipo.ELECTRICO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.BICHO, new HashMap<Tipo, Ventaja>(){{put(Tipo.TIERRA, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.BICHO, new HashMap<Tipo, Ventaja>(){{put(Tipo.NORMAL, Ventaja.SIN_VENTAJA);}});
-
-        //Tipo Volador
-        comprobarV.put(Tipo.VOLADOR, new HashMap<Tipo, Ventaja>(){{put(Tipo.AGUA, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.VOLADOR, new HashMap<Tipo, Ventaja>(){{put(Tipo.FUEGO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.VOLADOR, new HashMap<Tipo, Ventaja>(){{put(Tipo.PLANTA, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.VOLADOR, new HashMap<Tipo, Ventaja>(){{put(Tipo.BICHO, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.VOLADOR, new HashMap<Tipo, Ventaja>(){{put(Tipo.VOLADOR, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.VOLADOR, new HashMap<Tipo, Ventaja>(){{put(Tipo.ELECTRICO, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.VOLADOR, new HashMap<Tipo, Ventaja>(){{put(Tipo.TIERRA, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.VOLADOR, new HashMap<Tipo, Ventaja>(){{put(Tipo.NORMAL, Ventaja.SIN_VENTAJA);}});
-        
-        //Tipo Electrico
-        comprobarV.put(Tipo.ELECTRICO, new HashMap<Tipo, Ventaja>(){{put(Tipo.AGUA, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.ELECTRICO, new HashMap<Tipo, Ventaja>(){{put(Tipo.FUEGO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.ELECTRICO, new HashMap<Tipo, Ventaja>(){{put(Tipo.PLANTA, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.ELECTRICO, new HashMap<Tipo, Ventaja>(){{put(Tipo.BICHO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.ELECTRICO, new HashMap<Tipo, Ventaja>(){{put(Tipo.VOLADOR, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.ELECTRICO, new HashMap<Tipo, Ventaja>(){{put(Tipo.ELECTRICO, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.ELECTRICO, new HashMap<Tipo, Ventaja>(){{put(Tipo.TIERRA, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.ELECTRICO, new HashMap<Tipo, Ventaja>(){{put(Tipo.NORMAL, Ventaja.SIN_VENTAJA);}});
-
-        //Tipo Tierra
-        comprobarV.put(Tipo.TIERRA, new HashMap<Tipo, Ventaja>(){{put(Tipo.AGUA, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.TIERRA, new HashMap<Tipo, Ventaja>(){{put(Tipo.FUEGO, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.TIERRA, new HashMap<Tipo, Ventaja>(){{put(Tipo.PLANTA, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.TIERRA, new HashMap<Tipo, Ventaja>(){{put(Tipo.BICHO, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.TIERRA, new HashMap<Tipo, Ventaja>(){{put(Tipo.VOLADOR, Ventaja.NO_EFECTIVO);}});
-        comprobarV.put(Tipo.TIERRA, new HashMap<Tipo, Ventaja>(){{put(Tipo.ELECTRICO, Ventaja.EFECTIVO);}});
-        comprobarV.put(Tipo.TIERRA, new HashMap<Tipo, Ventaja>(){{put(Tipo.TIERRA, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.TIERRA, new HashMap<Tipo, Ventaja>(){{put(Tipo.NORMAL, Ventaja.SIN_VENTAJA);}});
-
-        //Tipo Normal
-        comprobarV.put(Tipo.NORMAL, new HashMap<Tipo, Ventaja>(){{put(Tipo.AGUA, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.NORMAL, new HashMap<Tipo, Ventaja>(){{put(Tipo.FUEGO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.NORMAL, new HashMap<Tipo, Ventaja>(){{put(Tipo.PLANTA, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.NORMAL, new HashMap<Tipo, Ventaja>(){{put(Tipo.BICHO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.NORMAL, new HashMap<Tipo, Ventaja>(){{put(Tipo.VOLADOR, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.NORMAL, new HashMap<Tipo, Ventaja>(){{put(Tipo.ELECTRICO, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.NORMAL, new HashMap<Tipo, Ventaja>(){{put(Tipo.TIERRA, Ventaja.SIN_VENTAJA);}});
-        comprobarV.put(Tipo.NORMAL, new HashMap<Tipo, Ventaja>(){{put(Tipo.NORMAL, Ventaja.SIN_VENTAJA);}});
-
-        System.out.println(comprobarV.get(mv.getTipo()).get(pokemon.getTipo()[0])); 
+        crearDebilidades();
+        if(debilidades.get(mv.getTipo()).contains(pokemon.getTipo()[0]) || debilidades.get(mv.getTipo()).contains(pokemon.getTipo()[1])){
+            this.ventaja = Ventaja.EFECTIVO;
+        } else if (fortalezas.get(mv.getTipo()).contains(pokemon.getTipo()[0]) || fortalezas.get(mv.getTipo()).contains(pokemon.getTipo()[1])){
+            this.ventaja = Ventaja.NO_EFECTIVO;
+        } else if (debilidades.get(mv.getTipo()).contains(pokemon.getTipo()[0]) || debilidades.get(mv.getTipo()).contains(pokemon.getTipo()[1]) && 
+        fortalezas.get(mv.getTipo()).contains(pokemon.getTipo()[0]) || fortalezas.get(mv.getTipo()).contains(pokemon.getTipo()[1])){
+            this.ventaja = Ventaja.SIN_VENTAJA;
+        }
 
 
 
