@@ -3,6 +3,8 @@ package main;
 import java.util.ArrayList;
 import java.util.Random;
 
+import combate.Combate;
+import combate.Turno;
 import entrenador.Entrenador;
 import enumerado.Estado;
 import enumerado.Mejora;
@@ -133,6 +135,37 @@ public class Main{
 
         //Ataque
         n1.atacarPokemon(mA3, n2);
+
+         //Creamos un combate
+         Entrenador entrenadorRival = new Entrenador("Carola", equipo1, equipo2);
+         Entrenador entrenador2 = new Entrenador("Pepe", equipo1, equipo2);
+         Entrenador entrenadorRival2 = new Entrenador("Manolo", equipo1, equipo2);
+         Combate c1 = new Combate(entrenador, entrenadorRival);
+         Combate c2 = new Combate(entrenador2, entrenadorRival2);
+
+         c1.combatir(entrenador, entrenadorRival, n1, n2);
+         c2.combatir(entrenador2, entrenadorRival2, n3, n4);
+
+         c1.getGanador().getNombreE();
+         c2.getGanador().getNombreE();
+
+         System.out.println(c1);
+
+         //Creamos turno
+         Turno t1 = new Turno(1, "Pikachu utiliza ataque electrico","Charmander usa lanzallamas" );
+         Turno t2 = new Turno(3, "Snorlax lanza hiperrayo", "Squirtle usa Placaje");
+         Turno t3 = new Turno(2, "Charmander usa Ascuas","Squirtle usa Burbuja" );
+        
+         //Añadimos el turno
+         c1.addTurno(t1);
+         c2.addTurno(t2);
+         
+
+         //Escribir combate
+         c1.escribirCombate();
+         c2.escribirCombate();
+
+
 
 
     }
