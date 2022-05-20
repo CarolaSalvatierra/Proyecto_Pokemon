@@ -134,6 +134,7 @@ public class Main{
         //Ataque
         n1.atacarPokemon(mA3, n2);
 
+
     }
     
 }
